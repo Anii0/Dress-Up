@@ -1,0 +1,197 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMain.java to edit this template
+ */
+package com.mycompany.dressup;
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.Group;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import static javafx.application.Application.launch;
+import javafx.event.ActionEvent;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.text.Text;
+import javafx.scene.text.Font;
+import javafx.scene.paint.Color;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.Pane;
+
+/**
+ *
+ * @author zulfa
+ */
+public class menu extends Application {
+private List<Avatar> avatars = new ArrayList<>();
+    private Stage primaryStage;
+private Stage scene1, scene2;
+    
+    @Override
+    public void start(Stage primaryStage){
+        
+        Text title = new Text("Dress Up");
+        title.setFont(new Font(50));
+        title.setFill(Color.RED);
+        
+        Button next1 = new Button("next");
+        
+        
+        VBox pane1 = new VBox(20);
+        pane1.setAlignment(Pos.CENTER);
+        pane1.getChildren().addAll(title, next1);
+        pane1.setStyle("-fx-background-color: rgb(189, 224, 254)");
+        
+        Scene scene1 = new Scene(pane1, 400, 500);
+        
+        
+        Button next2 = new Button("wow");
+        Button createAvatar1 = new Button("create avatar");
+
+        VBox pane2 = new VBox(20);
+        pane2.setAlignment(Pos.CENTER);
+        pane2.getChildren().addAll(next2, createAvatar1);
+        Scene scene2 = new Scene(pane2, 400, 500);
+        
+        Text text1 = new Text("avavaatar1 ");
+        VBox paneAvatar1 = new VBox(20);
+        paneAvatar1.setAlignment(Pos.CENTER);
+        paneAvatar1.getChildren().addAll(text1);
+        Scene sceneAvatar1 = new Scene(paneAvatar1, 400, 500);
+
+        next1.setOnAction(e -> primaryStage.setScene(scene2));
+        next2.setOnAction(e -> primaryStage.setScene(scene1));
+        createAvatar1.setOnAction(e -> showSceneAvatar1());
+        
+        primaryStage.setScene(scene1);
+        primaryStage.setTitle("poop");
+        primaryStage.show();
+        
+    }   
+        private void showSceneAvatar1() {
+        Avatar newAvatar = new Avatar("Avatar " + (avatars.size() + 1));
+
+        Label avatarLabel = new Label(newAvatar.getClothingText());
+
+        // Clothing controls
+        Button prevShirt = new Button("←");
+        prevShirt.setOnAction(e -> { newAvatar.previousClothing("shirt"); avatarLabel.setText(newAvatar.getClothingText()); });
+        Button nextShirt = new Button("→");
+        nextShirt.setOnAction(e -> { newAvatar.nextClothing("shirt"); avatarLabel.setText(newAvatar.getClothingText()); });
+
+        Button prevPants = new Button("←");
+        prevPants.setOnAction(e -> { newAvatar.previousClothing("pants"); avatarLabel.setText(newAvatar.getClothingText()); });
+        Button nextPants = new Button("→");
+        nextPants.setOnAction(e -> { newAvatar.nextClothing("pants"); avatarLabel.setText(newAvatar.getClothingText()); });
+
+        Button prevHat = new Button("←");
+        prevHat.setOnAction(e -> { newAvatar.previousClothing("hat"); avatarLabel.setText(newAvatar.getClothingText()); });
+        Button nextHat = new Button("→");
+        nextHat.setOnAction(e -> { newAvatar.nextClothing("hat"); avatarLabel.setText(newAvatar.getClothingText()); });
+
+
+
+        VBox avatarLayout = new VBox(10, avatarLabel,
+            new HBox(10, prevShirt, nextShirt),
+            new HBox(10, prevPants, nextPants),
+            new HBox(10, prevHat, nextHat));
+        
+        Scene avatar1scene = new Scene(avatarLayout, 200, 400);
+        primaryStage.setScene(avatar1scene);
+        primaryStage.setTitle("Create Avatar");
+
+    }
+    
+    
+    
+    public static void main(String[] args) {
+        launch(args);
+    }
+    
+    /*private List<Avatar> avatars = new ArrayList<>();
+    private Stage primaryStage;
+    private Scene menuScene, avatarScene;
+
+    @Override
+    public void start(Stage primaryStage) {
+        this.primaryStage = primaryStage;
+        showMenuScene();
+    }
+
+    private void showMenuScene() {
+        VBox menuLayout = new VBox(10);
+        Label title = new Label("Avatar Selection");
+        Button createAvatarButton = new Button("Create New Avatar");
+
+        // Display existing avatars
+        VBox avatarList = new VBox(5);
+        for (Avatar avatar : avatars) {
+            Label avatarLabel = new Label(avatar.getName() + " - " + avatar.getClothingText());
+            avatarList.getChildren().add(avatarLabel);
+        }
+
+        createAvatarButton.setOnAction(e -> showAvatarScene());
+
+        menuLayout.getChildren().addAll(title, avatarList, createAvatarButton);
+        menuScene = new Scene(menuLayout, 400, 400);
+        primaryStage.setScene(menuScene);
+        primaryStage.setTitle("Menu");
+        primaryStage.show();
+    }
+
+    private void showAvatarScene() {
+        Avatar newAvatar = new Avatar("Avatar " + (avatars.size() + 1));
+
+        Label avatarLabel = new Label(newAvatar.getClothingText());
+
+        // Clothing controls
+        Button prevShirt = new Button("←");
+        prevShirt.setOnAction(e -> { newAvatar.previousClothing("shirt"); avatarLabel.setText(newAvatar.getClothingText()); });
+        Button nextShirt = new Button("→");
+        nextShirt.setOnAction(e -> { newAvatar.nextClothing("shirt"); avatarLabel.setText(newAvatar.getClothingText()); });
+
+        Button prevPants = new Button("←");
+        prevPants.setOnAction(e -> { newAvatar.previousClothing("pants"); avatarLabel.setText(newAvatar.getClothingText()); });
+        Button nextPants = new Button("→");
+        nextPants.setOnAction(e -> { newAvatar.nextClothing("pants"); avatarLabel.setText(newAvatar.getClothingText()); });
+
+        Button prevHat = new Button("←");
+        prevHat.setOnAction(e -> { newAvatar.previousClothing("hat"); avatarLabel.setText(newAvatar.getClothingText()); });
+        Button nextHat = new Button("→");
+        nextHat.setOnAction(e -> { newAvatar.nextClothing("hat"); avatarLabel.setText(newAvatar.getClothingText()); });
+
+        // Done button
+        Button doneButton = new Button("Done");
+        doneButton.setOnAction(e -> {
+            avatars.add(newAvatar);
+            showMenuScene(); // Return to menu after saving the avatar
+        });
+
+        VBox avatarLayout = new VBox(10, avatarLabel,
+            new HBox(10, prevShirt, nextShirt),
+            new HBox(10, prevPants, nextPants),
+            new HBox(10, prevHat, nextHat),
+            doneButton);
+
+        avatarScene = new Scene(avatarLayout, 400, 400);
+        primaryStage.setScene(avatarScene);
+        primaryStage.setTitle("Create Avatar");
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }  
+*/
+}
