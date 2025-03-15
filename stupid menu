@@ -37,11 +37,11 @@ import javafx.scene.layout.Pane;
 public class menu extends Application {
 private List<Avatar> avatars = new ArrayList<>();
     private Stage primaryStage;
-private Stage scene1, scene2;
+private Scene scene1, scene2;
     
     @Override
     public void start(Stage primaryStage){
-        
+        this.primaryStage = primaryStage;
         Text title = new Text("Dress Up");
         title.setFont(new Font(50));
         title.setFill(Color.RED);
@@ -65,11 +65,12 @@ private Stage scene1, scene2;
         pane2.getChildren().addAll(next2, createAvatar1);
         Scene scene2 = new Scene(pane2, 400, 500);
         
-        Text text1 = new Text("avavaatar1 ");
+        /*Text text1 = new Text("avavaatar1 ");
         VBox paneAvatar1 = new VBox(20);
         paneAvatar1.setAlignment(Pos.CENTER);
         paneAvatar1.getChildren().addAll(text1);
         Scene sceneAvatar1 = new Scene(paneAvatar1, 400, 500);
+        */
 
         next1.setOnAction(e -> primaryStage.setScene(scene2));
         next2.setOnAction(e -> primaryStage.setScene(scene1));
