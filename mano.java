@@ -1,6 +1,6 @@
 //looks beter but its only up until uhhhhhhhhhhh scene1 and scene2 no cant edit
 
-package com.mycompany.dressup;
+package com.mycompany.excersize;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -16,15 +16,18 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.scene.control.TextField;
 
 /**
  *
  * @author zulfa
  */
-public class mano extends Application {
+public class menu extends Application {
     Avatar avatar1 = new Avatar("Billy Bob");
     Avatar avatar2 = new Avatar("Silly Susie");
     Avatar avatar3 = new Avatar("Jonny John");
+    private String avatar1putname = "";
+    private Label name1Label = new Label();
 
     Avatar currentAvatar = null;
     Label avatarLabel; // Label for displaying clothing text
@@ -51,7 +54,19 @@ public class mano extends Application {
             // Avatar selection buttons
                 Text avatar1Name = new Text(avatar1.getName());
                 Button editAvatar1 = new Button("Avatar 1");
-
+                
+                //setting name
+                TextField avatar1text = new TextField();
+                Button setName = new Button("Set Name");
+                
+                //making name set w button
+                setName.setOnAction(e -> 
+                {
+                avatar1putname = avatar1text.getText();
+                name1Label.setText(avatar1putname);
+                avatar1text.setVisible(false);
+                setName.setVisible(false);});
+                
                 Text avatar2Name = new Text(avatar2.getName());
                 Button editAvatar2 = new Button("Avatar 2");
 
@@ -60,9 +75,10 @@ public class mano extends Application {
 
                 Button back = new Button("Go Back");
                 
+                                
             //vbox
                 VBox avatarSelection = new VBox(50, 
-                new HBox(20, avatar1Name, editAvatar1) {{setAlignment(Pos.CENTER);}},
+                new HBox(20, /*avatar1Name,*/ editAvatar1, avatar1text, setName, name1Label) {{setAlignment(Pos.CENTER);}},
                 new HBox(20, avatar2Name, editAvatar2) {{setAlignment(Pos.CENTER);}},
                 new HBox(20, avatar3Name, editAvatar3) {{setAlignment(Pos.CENTER);}}, back);
                 avatarSelection.setAlignment(Pos.CENTER);
