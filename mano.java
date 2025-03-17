@@ -1,6 +1,9 @@
-//looks beter but its only up until uhhhhhhhhhhh scene1 and scene2 no cant edit
+//change names so easier to understand
+//add avatar name editing for avatars 2/3
+//create the actual editing avatar scene
 
 package com.mycompany.excersize;
+
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -22,12 +25,17 @@ import javafx.scene.control.TextField;
  *
  * @author zulfa
  */
-public class menu extends Application {
+public class mano extends Application {
     Avatar avatar1 = new Avatar("Billy Bob");
     Avatar avatar2 = new Avatar("Silly Susie");
     Avatar avatar3 = new Avatar("Jonny John");
     private String avatar1putname = "";
-    private Label name1Label = new Label();
+    private Label name1Label = new Label("Avatar 1");
+    Button editAvatar1;
+    TextField avatar1text;
+    Button setName;
+                    int setNameLoop = 0;
+
 
     Avatar currentAvatar = null;
     Label avatarLabel; // Label for displaying clothing text
@@ -50,22 +58,49 @@ public class menu extends Application {
             
         // Closet Scene
         Text closetText = new Text("Select An Avatar to Edit!");
+        
 
             // Avatar selection buttons
                 Text avatar1Name = new Text(avatar1.getName());
                 Button editAvatar1 = new Button("Avatar 1");
                 
+                
                 //setting name
                 TextField avatar1text = new TextField();
-                Button setName = new Button("Set Name");
+                Button setName = new Button("Edit Name");
+                
+                                HBox avatar1box = new HBox(20, /*avatar1Name,*/ editAvatar1, avatar1text, setName) {{setAlignment(Pos.CENTER);}};
+
+                
+
+                    setName.setOnAction(eo ->
+                    {
+                        setNameLoop++;
+                        if(setNameLoop%2 == 0){
+                            avatar1box.getChildren().removeAll(setName);
+                            avatar1box.getChildren().addAll(avatar1text, setName);
+                            avatar1box.getChildren().removeAll(name1Label);
+                        }else{
+                            avatar1box.getChildren().removeAll(avatar1text, editAvatar1, setName);
+                            avatar1box.getChildren().addAll(name1Label, editAvatar1, setName);
+                            avatar1putname = avatar1text.getText();
+                            name1Label.setText(avatar1putname);
+                        }
+                        
+                    });
+              
+                
+
                 
                 //making name set w button
-                setName.setOnAction(e -> 
+
+                /*setName.setOnAction(e -> 
                 {
                 avatar1putname = avatar1text.getText();
                 name1Label.setText(avatar1putname);
-                avatar1text.setVisible(false);
-                setName.setVisible(false);});
+                avatar1box.getChildren().removeAll(setName,avatar1text);
+                });
+                */
                 
                 Text avatar2Name = new Text(avatar2.getName());
                 Button editAvatar2 = new Button("Avatar 2");
@@ -75,17 +110,19 @@ public class menu extends Application {
 
                 Button back = new Button("Go Back");
                 
+                
+                
                                 
-            //vbox
+            //vbox            
                 VBox avatarSelection = new VBox(50, 
-                new HBox(20, /*avatar1Name,*/ editAvatar1, avatar1text, setName, name1Label) {{setAlignment(Pos.CENTER);}},
+                avatar1box,
                 new HBox(20, avatar2Name, editAvatar2) {{setAlignment(Pos.CENTER);}},
                 new HBox(20, avatar3Name, editAvatar3) {{setAlignment(Pos.CENTER);}}, back);
                 avatarSelection.setAlignment(Pos.CENTER);
             //scene
-                Scene closet = new Scene(avatarSelection, 300, 350);
-                play.setOnAction(e -> primaryStage.setScene(closet));
-                back.setOnAction(e -> primaryStage.setScene(menuScene));
+                Scene closet = new Scene(avatarSelection, 400, 350);
+                play.setOnAction(er -> primaryStage.setScene(closet));
+                back.setOnAction(er -> primaryStage.setScene(menuScene));
     
     
         primaryStage.setTitle("Dress Up Game!");
