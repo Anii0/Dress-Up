@@ -1,7 +1,7 @@
 //finished but super ugly
 
 
-package com.mycompany.dressup;
+package com.mycompany.excersize;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -24,7 +24,7 @@ import javafx.scene.control.Label;
  *
  * @author zulfa
  */
-public class manu extends Application {
+public class menu extends Application {
     Avatar avatar1 = new Avatar("Billy Bob");
     Avatar avatar2 = new Avatar("Silly Susie");
     Avatar avatar3 = new Avatar("Jonny John");
@@ -45,7 +45,7 @@ public class manu extends Application {
         main.setAlignment(Pos.CENTER);
         main.getChildren().addAll(title, play);
 
-        Scene menuScene = new Scene(main, 300, 250);
+        Scene menuScene = new Scene(main, 400, 500);
 
         // Closet Scene
         Text closetText = new Text("Select An Avatar to Edit!");
@@ -72,7 +72,7 @@ public class manu extends Application {
             back
         );
 
-        Scene closet = new Scene(avatarSelection, 300, 350);
+        Scene closet = new Scene(avatarSelection, 400, 500);
         play.setOnAction(e -> primaryStage.setScene(closet));
         back.setOnAction(e -> primaryStage.setScene(menuScene));
 
@@ -88,8 +88,32 @@ public class manu extends Application {
         Button nextHat = new Button("→");
 
         Button done = new Button("Done");
+        
+        //new avatar editor scene
+        HBox editAvatar = new HBox(20);
+        editAvatar.setAlignment(Pos.CENTER);
 
-        VBox avatarEditor = new VBox(20);
+        VBox leftButton = new VBox(60);
+        leftButton.setAlignment(Pos.CENTER);
+        leftButton.getChildren().addAll(prevShirt, prevPants, prevHat);
+
+        VBox rightButton = new VBox(60);
+        rightButton.setAlignment(Pos.CENTER);
+        rightButton.getChildren().addAll(nextShirt, nextPants, nextHat);
+
+        VBox avatarMiddle = new VBox();
+        avatarMiddle.getChildren().add(avatarLabel); 
+
+        editAvatar.getChildren().addAll(leftButton, avatarMiddle, rightButton);
+
+        VBox withDone = new VBox(20);
+        withDone.setAlignment(Pos.CENTER);
+        withDone.getChildren().addAll(editAvatar, done);
+
+        Scene editor = new Scene(withDone, 400, 500);
+
+        //old vbox with all buttons
+        /*VBox avatarEditor = new VBox(20);
         avatarEditor.setAlignment(Pos.CENTER);
         avatarEditor.getChildren().addAll(
             avatarLabel, 
@@ -100,6 +124,7 @@ public class manu extends Application {
         );
 
         Scene editor = new Scene(avatarEditor, 300, 350);
+        */
 
         // Method to set up the avatar selection
         EventHandler<ActionEvent> avatarSelectionHandler = e -> {
