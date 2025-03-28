@@ -9,6 +9,8 @@ import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.scene.layout.VBox;
@@ -89,7 +91,6 @@ public class menu extends Application {
 
         Button done = new Button("Done");
         
-        //new avatar editor scene
         HBox editAvatar = new HBox(20);
         editAvatar.setAlignment(Pos.CENTER);
 
@@ -102,7 +103,18 @@ public class menu extends Application {
         rightButton.getChildren().addAll(nextShirt, nextPants, nextHat);
 
         VBox avatarMiddle = new VBox();
-        avatarMiddle.getChildren().add(avatarLabel); 
+        Image img = new Image(("/pics/body.png"));
+
+        if (img.isError()) {
+            System.out.println("Error loading image!");
+        } else {
+            System.out.println("Image loaded successfully!");
+        }
+
+        ImageView imgView = new ImageView(img);
+        imgView.setFitWidth(200);
+        imgView.setFitHeight(300);
+        avatarMiddle.getChildren().addAll(avatarLabel, imgView); 
 
         editAvatar.getChildren().addAll(leftButton, avatarMiddle, rightButton);
 
