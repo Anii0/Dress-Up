@@ -2,36 +2,43 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.excersize;
+package com.mycompany.dressup;
 
-import java.util.ArrayList;
 
 /**
  *
- * @author Anikah
+ * @author zulfa
  */
-public class Achievements extends User{
-    private String achievementName;
-    private ArrayList<String> achievements;
-
+public class Achievements{
+    private String name;
+    private String description;
+    private int totalCheeses;
     
-    public Achievements(String achievementName, String username){
-        this.achievementName = achievementName;
-        super(username);
+    public Achievements(String name, String description){
+        this.name = name;
+        this.description = description;
+        totalCheeses++;
     }
+    
     public String getName(){
-        return achievementName;
+        return name;
     }
-    public void isUnlocked(String name){
-       /*for (String achievementName: achievements){
-            if (achievementName.getName().equalsIgnoreCase(name)){
-                achievements.remove(item);
-                System.out.println(name + " removed Successfully");
-                return true;
-            }
-        }
-        System.out.println(name+ " not found");
-        return false;*/
+    
+    public String getDescription(){
+        return description;
+    }
+    
+    public void setName(String name){
+        this.name = name;
+    }
+    
+    public void setDescription(String description){
+        this.description = description;
+    }
+    
+    @Override
+    public String toString(){
+        return this.name + ": " + this.description + "\n";
     }
     
 }
