@@ -1,9 +1,12 @@
-//change names so easier to understand
-//add avatar name editing for avatars 2/3
-//create the actual editing avatar scene
+// you can change avatar 1 name nicely on menu page
+// you can change avatars clothes
+// theres a picture of dokja
 
-package com.mycompany.excersize;
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMain.java to edit this template
+ */
+package com.mycompany.dressup;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -20,21 +23,23 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+ import javafx.scene.image.ImageView;
 
 /**
  *
  * @author zulfa
  */
 public class mano extends Application {
-    Avatar avatar1 = new Avatar("Billy Bob");
-    Avatar avatar2 = new Avatar("Silly Susie");
-    Avatar avatar3 = new Avatar("Jonny John");
+    Avatar avatar1 = new Avatar("Rename Me!");
+    Avatar avatar2 = new Avatar("Rename Me!");
+    Avatar avatar3 = new Avatar("Rename Me!");
     private String avatar1putname = "";
     private Label name1Label = new Label("Avatar 1");
     Button editAvatar1;
     TextField avatar1text;
     Button setName;
-                    int setNameLoop = 0;
+    int setNameLoop = 0;
 
 
     Avatar currentAvatar = null;
@@ -68,8 +73,10 @@ public class mano extends Application {
                 //setting name
                 TextField avatar1text = new TextField();
                 Button setName = new Button("Edit Name");
+                                            System.out.println(avatar1.getName());
+
                 
-                                HBox avatar1box = new HBox(20, /*avatar1Name,*/ editAvatar1, avatar1text, setName) {{setAlignment(Pos.CENTER);}};
+                HBox avatar1box = new HBox(20, avatar1Name, editAvatar1, avatar1text, setName) {{setAlignment(Pos.CENTER);}};
 
                 
 
@@ -80,27 +87,18 @@ public class mano extends Application {
                             avatar1box.getChildren().removeAll(setName);
                             avatar1box.getChildren().addAll(avatar1text, setName);
                             avatar1box.getChildren().removeAll(name1Label);
+                                                        System.out.println(avatar1.getName());
+
                         }else{
                             avatar1box.getChildren().removeAll(avatar1text, editAvatar1, setName);
-                            avatar1box.getChildren().addAll(name1Label, editAvatar1, setName);
+                            avatar1box.getChildren().addAll(editAvatar1, setName);
                             avatar1putname = avatar1text.getText();
-                            name1Label.setText(avatar1putname);
+                            avatar1Name.setText(avatar1putname);
+                            avatar1.setName(avatar1putname);
+                            System.out.println(avatar1.getName());
                         }
                         
                     });
-              
-                
-
-                
-                //making name set w button
-
-                /*setName.setOnAction(e -> 
-                {
-                avatar1putname = avatar1text.getText();
-                name1Label.setText(avatar1putname);
-                avatar1box.getChildren().removeAll(setName,avatar1text);
-                });
-                */
                 
                 Text avatar2Name = new Text(avatar2.getName());
                 Button editAvatar2 = new Button("Avatar 2");
@@ -109,10 +107,7 @@ public class mano extends Application {
                 Button editAvatar3 = new Button("Avatar 3");
 
                 Button back = new Button("Go Back");
-                
-                
-                
-                                
+                                      
             //vbox            
                 VBox avatarSelection = new VBox(50, 
                 avatar1box,
@@ -124,7 +119,96 @@ public class mano extends Application {
                 play.setOnAction(er -> primaryStage.setScene(closet));
                 back.setOnAction(er -> primaryStage.setScene(menuScene));
     
-    
+    // Avatar Editing Scene
+        
+        Image img = new Image(("/body/dokja.png"));
+ 
+         if (img.isError()) {
+             System.out.println("Error loading image!");
+         } else {
+             System.out.println("Image loaded successfully!");
+         }
+ 
+         ImageView imgView = new ImageView(img);
+         imgView.setFitWidth(100);
+         imgView.setFitHeight(120);
+         
+        avatarLabel = new Label("Select an avatar to start editing!");
+
+        // Clothing navigation buttons
+        Button prevShirt = new Button("←");
+        Button nextShirt = new Button("→");
+        Button prevPants = new Button("←");
+        Button nextPants = new Button("→");
+        Button prevHat = new Button("←");
+        Button nextHat = new Button("→");
+
+        Button done = new Button("Done");
+        done.setOnAction(en -> primaryStage.setScene(closet));
+
+        VBox avatarEditor = new VBox(30);
+        avatarEditor.setAlignment(Pos.CENTER);
+        avatarEditor.getChildren().addAll(
+                avatarLabel,
+                new HBox(20,
+                new VBox(40, prevShirt, prevPants, prevHat),
+                imgView, 
+                new VBox(40, nextShirt, nextPants, nextHat)){{setAlignment(Pos.CENTER);}},
+                done
+        );
+
+        Scene editor = new Scene(avatarEditor, 300, 350);
+
+        // Method to set up the avatar selection
+        EventHandler<ActionEvent> avatarSelectionHandler = e -> {
+            if (e.getSource() == editAvatar1) {
+                currentAvatar = avatar1;
+            } else if (e.getSource() == editAvatar2) {
+                currentAvatar = avatar2;
+            } else if (e.getSource() == editAvatar3) {
+                currentAvatar = avatar3;
+            }
+
+            avatarLabel.setText(currentAvatar.getClothingText()); // Update label
+
+            // Now set clothing button actions
+            prevShirt.setOnAction(ev -> { 
+                currentAvatar.previousClothing("shirt"); 
+                avatarLabel.setText(currentAvatar.getClothingText()); 
+            });
+            nextShirt.setOnAction(ev -> { 
+                currentAvatar.nextClothing("shirt"); 
+                avatarLabel.setText(currentAvatar.getClothingText()); 
+            });
+
+            prevPants.setOnAction(ev -> { 
+                currentAvatar.previousClothing("pants"); 
+                avatarLabel.setText(currentAvatar.getClothingText()); 
+            });
+            nextPants.setOnAction(ev -> { 
+                currentAvatar.nextClothing("pants"); 
+                avatarLabel.setText(currentAvatar.getClothingText()); 
+            });
+
+            prevHat.setOnAction(ev -> { 
+                currentAvatar.previousClothing("hat"); 
+                avatarLabel.setText(currentAvatar.getClothingText()); 
+            });
+            nextHat.setOnAction(ev -> { 
+                currentAvatar.nextClothing("hat"); 
+                avatarLabel.setText(currentAvatar.getClothingText()); 
+            });
+
+            primaryStage.setScene(editor);
+        };
+
+        // Assign event handlers to avatar buttons
+        editAvatar1.setOnAction(avatarSelectionHandler);
+        editAvatar2.setOnAction(avatarSelectionHandler);
+        editAvatar3.setOnAction(avatarSelectionHandler);
+                
+                
+                
         primaryStage.setTitle("Dress Up Game!");
         primaryStage.setScene(menuScene);
         primaryStage.show();
