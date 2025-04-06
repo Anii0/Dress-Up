@@ -10,18 +10,19 @@ import java.util.ArrayList;
  */
 public class User {
     private String username;
-    private ArrayList<String> achievements;
+    private double timePlayed;
     
     public User(String username){
         this.username = username;
-        this.achievements = new ArrayList<>(); // ?
-        
-        achievements.add("Style Master");
     }
     public String getUsername(){
         return username;
     }
     public void setUsername(String username){
         this.username = username;
+    }
+    public double timePlayed(){
+        return 10;
+        //this is just a placeholder
     }
 }
