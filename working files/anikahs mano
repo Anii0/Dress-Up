@@ -2,6 +2,7 @@
 //has edit names but 2 and 3 dont work
 //added comments and fixed up some tabbs
 
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMain.java to edit this template
@@ -47,7 +48,9 @@ public class menu extends Application {
     //TextField avatar1text;
     //Button setName;
    
-    int setNameLoop = 0;
+    int setNameLoop1 = 0;
+    int setNameLoop2 = 0;
+    int setNameLoop3 = 0;
     int editingAvatarIndex = 0; 
 
     private ImageView shirtImg;
@@ -92,8 +95,8 @@ public class menu extends Application {
 
                     setName.setOnAction(eo ->
                     {
-                        setNameLoop++;
-                        if(setNameLoop%2 == 0){
+                        setNameLoop1++;
+                        if(setNameLoop1%2 == 0){
                             avatar1box.getChildren().removeAll(setName);
                             avatar1box.getChildren().addAll(avatar1text, setName);
                             avatar1box.getChildren().removeAll(name1Label);
@@ -125,8 +128,8 @@ public class menu extends Application {
 
                     setName2.setOnAction(eo ->
                     {
-                        setNameLoop++;
-                        if(setNameLoop%2 == 0){
+                        setNameLoop2++;
+                        if(setNameLoop2%2 == 0){
                             avatar2box.getChildren().removeAll(setName2);
                             avatar2box.getChildren().addAll(avatar2text, setName2);
                             avatar2box.getChildren().removeAll(name2Label);
@@ -148,7 +151,7 @@ public class menu extends Application {
                 Text avatar3Name = new Text(avatar3.getName());
                 Button editAvatar3 = new Button("Avatar 3");
                 
-                //setting name for 3 (also dont work)
+                //setting name for 3 
                 TextField avatar3text = new TextField();
                 Button setName3 = new Button("Edit Name");
                 System.out.println(avatar3.getName());
@@ -158,8 +161,8 @@ public class menu extends Application {
 
                     setName3.setOnAction(eo ->
                     {
-                        setNameLoop++;
-                        if(setNameLoop%2 == 0){
+                        setNameLoop3++;
+                        if(setNameLoop3%2 == 0){
                             avatar3box.getChildren().removeAll(setName3);
                             avatar3box.getChildren().addAll(avatar3text, setName3);
                             avatar3box.getChildren().removeAll(name3Label);
