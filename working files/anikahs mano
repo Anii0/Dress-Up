@@ -2,7 +2,6 @@
 //has edit names but 2 and 3 dont work
 //added comments and fixed up some tabbs
 
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMain.java to edit this template
@@ -25,13 +24,25 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
- import javafx.scene.image.ImageView;
+import javafx.scene.image.ImageView;
+//timer stuff
+import javafx.animation.Timeline;
+import javafx.animation.KeyFrame; //to count seconds
+import javafx.util.Duration;
+
+
 
 /**
  *
  * @author zulfa
  */
 public class menu extends Application {
+    
+    //new
+    User user = new User("");
+    Label timerLabel = new Label("Time: 0s");
+    //
+    
     Avatar avatar1 = new Avatar("Rename Me!");
     Avatar avatar2 = new Avatar("Rename Me!");
     Avatar avatar3 = new Avatar("Rename Me!");
@@ -63,18 +74,54 @@ public class menu extends Application {
     
     @Override
     public void start(Stage primaryStage) {
+        //font
+        Font pixelFont = Font.loadFont(getClass().getResourceAsStream("/fonts/Daydream.ttf"), 14);
+                
+        //timer
+        Timeline timmmmer = new Timeline(new KeyFrame(Duration.seconds(1), el -> {
+            timerLabel.setText("Time: " + (int) user.getTimeSeconds() + "s");
+        }));
+        timmmmer.setCycleCount(Timeline.INDEFINITE);
+        timmmmer.play();
+        
+        
         // Menu Scene
             Text title = new Text("Play Dress Up!");
-            title.setFont(new Font(30));
+            
+            title.setFont(Font.font(pixelFont.getName(), 30));
             title.setFill(Color.CORAL);
 
             Button play = new Button("Play!");
+            play.setStyle("-fx-font-family: 'Daydream'; -fx-padding: 0 4 8 4; "
+                    + "-fx-background-color: white; -fx-border-radius: 10; "
+                    + "-fx-border-width: 2px; -fx-background-radius: 10; "
+                    + "-fx-border-color: purple; -fx-text-fill: purple");
 
+            
             VBox main = new VBox(50);
             main.setAlignment(Pos.CENTER);
-            main.getChildren().addAll(title, play);
+            main.getChildren().addAll(title, play, timerLabel);
 
-            Scene menuScene = new Scene(main, 500, 600);
+            ImageView titleBackground = new ImageView(new Image("/pics/title-background.png"));
+            StackPane fullmenu = new StackPane(titleBackground, main);
+
+            Scene menuScene = new Scene(fullmenu, 500, 600);
+            
+            
+        // User Log In
+            Text name = new Text("What's your name?");
+            name.setFont(new Font(30));
+            name.setFill(Color.CORAL);
+            
+            TextField enterUser = new TextField();
+            enterUser.setMaxWidth(200);
+            Button enter = new Button("Enter");
+            
+            VBox userScene = new VBox(50);
+            userScene.setAlignment(Pos.CENTER);
+            userScene.getChildren().addAll(name, enterUser, enter);
+
+            Scene userSceneReal = new Scene(userScene, 500, 600);
             
         // Closet Scene
         Text closetText = new Text("Select An Avatar to Edit!");
@@ -189,7 +236,12 @@ public class menu extends Application {
                 avatarSelection.setAlignment(Pos.CENTER);
             // closet scene
                 Scene closet = new Scene(avatarSelection, 500, 600);
-                play.setOnAction(er -> primaryStage.setScene(closet));
+                play.setOnAction(er -> primaryStage.setScene(userSceneReal));
+                enter.setOnAction(er -> {
+                    primaryStage.setScene(closet);
+                    user.setUsername(enterUser.getText());
+                    System.out.println(user.getUsername());
+                });
                 back.setOnAction(er -> primaryStage.setScene(menuScene));
     
     // Avatar Editing Scene
