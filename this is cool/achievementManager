@@ -1,0 +1,50 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.mycompany.dressup;
+import java.util.ArrayList;
+
+
+/**
+ *
+ * @author zulfa
+ */
+public class AchievementManager {
+    private final ArrayList<Achievements> cheeses;
+    
+    public AchievementManager(){
+        cheeses = new ArrayList<>();
+    }
+    
+    public void addAchievement(Achievements name){
+        cheeses.add(name);
+    }
+    
+    public boolean isNotUnlocked(String cheese){
+        System.out.println("Checking for " + cheese + "...");
+        for (Achievements name : cheeses){
+            if(name.getName().equalsIgnoreCase(cheese)){
+                System.out.println("User has the achievement: " + cheese);
+                return false;
+            }
+        } 
+        System.out.println("User does not have achievement: " + cheese);
+        return true;
+    }
+    
+    
+    //got this from bestie gpt
+    public String displayAchievements() {
+    if (cheeses.isEmpty()) {
+        return "No achievements unlocked yet! Do better. Play more!";
+    }
+
+    StringBuilder sb = new StringBuilder("Unlocked Achievements:\n");
+    for (Achievements name : cheeses) {
+        sb.append("- ").append(name.toString());
+    }
+    return sb.toString();
+}
+    
+}
