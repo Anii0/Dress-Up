@@ -1,0 +1,93 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.mycompany.dressup;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import javafx.scene.image.Image;
+/**
+ *
+ * @author zulfa
+ */
+public class Avatar {
+    //protected so girl boy can access
+    protected HashMap<String, String[]> clothingOptions;
+    private HashMap<String, Integer> clothingIndex;
+    private String name;
+    private Image bodyType;
+    private Image gender;
+
+    public Avatar(String name) {
+        this.name = name;
+        clothingOptions = new HashMap<>();
+        clothingIndex = new HashMap<>();
+
+        // Clothing options
+        clothingOptions.put("shirt", new String[]{"/tops/G-top-2.png"});
+        clothingOptions.put("pants", new String[]{"/pants/G-pant-3.png"});
+        clothingOptions.put("hat", new String[]{"/hair/G-hair-2.png"});
+
+        // Default to first clothing item
+        clothingIndex.put("shirt", 0);
+        clothingIndex.put("pants", 0);
+        clothingIndex.put("hat", 0);
+        
+        setGender("/genders/N-face.png");
+        setBodyType("/body/L-body.png");
+    }
+
+    public void nextClothing(String type) {
+        int currentIndex = clothingIndex.get(type);
+        int newIndex = (currentIndex + 1) % clothingOptions.get(type).length;
+        clothingIndex.put(type, newIndex);
+    }
+
+    public void previousClothing(String type) {
+        int currentIndex = clothingIndex.get(type);
+        int newIndex = (currentIndex - 1 + clothingOptions.get(type).length) % clothingOptions.get(type).length;
+        clothingIndex.put(type, newIndex);
+    }
+
+    public String getClothingImg(String type) {
+        return clothingOptions.get(type)[clothingIndex.get(type)];
+    }
+
+    public String getName() {
+        return name;
+    }
+    public void setName(String name){
+        this.name = name;
+    }
+    
+    public Image getBodyType(){
+        return bodyType;
+    }
+    
+    public Image setBodyType(String imagePath){
+        this.bodyType = new Image(imagePath);
+        return bodyType;
+    }
+    
+    public Image setGender(String GimagePath){
+        this.gender = new Image(GimagePath);
+        return gender;
+    }
+    
+    public Image getGender(){
+        return gender;
+    }
+    
+    public void setClothingOptions(String clothingType, String[] options) {
+        clothingOptions.put(clothingType, options);
+    }
+}
+
