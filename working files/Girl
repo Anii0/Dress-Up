@@ -1,0 +1,22 @@
+package com.mycompany.excersize;
+import javafx.scene.image.Image;
+
+/**
+ *
+ * @author Anikah
+ */
+public class Girl extends Avatar {
+
+    private Image girlBody;
+    
+    public Girl(String name){
+        super(name);
+        
+        clothingOptions.put("shirt", new String[]{"/pics/Gtop1.png", "/pics/Gtop2.png"});
+        clothingOptions.put("pants", new String[]{"/pics/Gpant1.png"});
+        clothingOptions.put("hat", new String[]{"/pics/Gpant1.png"});
+        
+        setBodyType("/pics/girlbody.png");
+
+    }
+}
