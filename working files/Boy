@@ -1,0 +1,18 @@
+package com.mycompany.excersize;
+
+/**
+ *
+ * @author Anikah
+ */
+public class Boy extends Avatar{
+    
+    public Boy(String name){
+        super(name);
+        
+        clothingOptions.put("shirt", new String[]{"/pics/Gtop1.png", "/pics/Gtop2.png"});
+        clothingOptions.put("pants", new String[]{"/pics/Gpant2.png"});
+        clothingOptions.put("hat", new String[]{"/pics/Gpant1.png"});
+        
+        setBodyType("/pics/body.jpg");
+    }
+}
