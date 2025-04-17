@@ -1,0 +1,29 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.mycompany.dressup;
+
+/**
+ *
+ * @author zulfa
+ */
+public class Boy extends Avatar{
+    
+    public Boy(String name){
+        super(name);
+        
+        clothingOptions.put("shirt", new String[]{"/tops/B-top-1.png", "/tops/B-top-2.png", "/tops/B-top-3.png", 
+                                                  "/tops/B-top-4.png", "/tops/B-top-5.png", "/tops/B-top-6.png",
+                                                  "/tops/B-top-7.png", "/tops/B-top-8.png"});
+        
+        clothingOptions.put("pants", new String[]{"/pants/B-pant-1.png", "/pants/B-pant-2.png", "/pants/B-pant-3.png", 
+                                                  "/pants/B-pant-4.png", "/pants/B-pant-5.png", "/pants/B-pant-6.png", 
+                                                  "/pants/B-pant-7.png", "/pants/B-pant-8.png"});
+        
+        clothingOptions.put("hat", new String[]{"/hair/B-hair-1.png", "/hair/B-hair-2.png", "/hair/B-hair-3.png", 
+                                                "/hair/B-hair-4.png", "/hair/B-hair-5.png"});
+        
+        setGender("/genders/B-face.png");
+    }
+}
