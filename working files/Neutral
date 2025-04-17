@@ -1,0 +1,17 @@
+package com.mycompany.excersize;
+
+/**
+ *
+ * @author Anikah
+ */
+public class Neutral extends Avatar{
+    public Neutral(String name){
+        super(name);
+        
+        clothingOptions.put("shirt", new String[]{"/pics/Gpant1.png"});
+        clothingOptions.put("pants", new String[]{"/pics/Gpant1.png", "/pics/Gpant2.png"});
+        clothingOptions.put("hat", new String[]{"/pics/Gpant1.png"});
+        
+        setBodyType("/pics/mathimg.jpg");
+    }
+}
