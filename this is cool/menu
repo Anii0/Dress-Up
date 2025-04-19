@@ -1,4 +1,5 @@
-//has all achiveemnts
+// has all achievements
+// has user info scene
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -25,6 +26,7 @@ import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import java.util.ArrayList;
 //timer stuff
 import javafx.animation.Timeline;
 import javafx.animation.KeyFrame; //to count seconds
@@ -92,6 +94,7 @@ public class mano extends Application {
     private boolean achiThree = false;
     private boolean achiFour = false;
     
+    ArrayList<Achievements> allAchievements = new ArrayList<>();
     
     
     @Override
@@ -142,7 +145,8 @@ public class mano extends Application {
             
         // Closet Scene
         Text closetText = new Text("Select An Avatar to Edit!");
-        
+            
+            Button checkUserInfo = new Button("User Info");
 
             // Avatar selection buttons
                 Text avatar1Name = new Text(avatar1.getName());
@@ -268,6 +272,7 @@ public class mano extends Application {
                                       
             //vbox for picking avatar and naming           
                 VBox avatarSelection = new VBox(50, 
+                new HBox(20, checkUserInfo) {{setAlignment(Pos.TOP_RIGHT);}}, 
                 closetText, avatar1box,
                 new HBox(20, avatar2box) {{setAlignment(Pos.CENTER);}},
                 new HBox(20, avatar3box) {{setAlignment(Pos.CENTER);}}, back);
@@ -328,7 +333,9 @@ public class mano extends Application {
             hatImg.setFitHeight(340);
         
         
-        avatarLabel = new Label("Select an avatar to start editing!");
+        avatarLabel = new Label("Select a gender and skin tone below!");
+        avatarLabel.setStyle("-fx-font-weight: bold;");
+        
 
         bodyImgView = new ImageView();
         bodyImgView.setFitWidth(215);
@@ -512,19 +519,34 @@ public class mano extends Application {
                 }
             }
         }));
-        
         timmmmer.setCycleCount(Timeline.INDEFINITE);
         timmmmer.play();
         
-
-        
-
-        
-        
         //achivements
+        Text achievementsListTitle = new Text("Unlocked Achievements:");
+            allAchievements.add(one);
+            allAchievements.add(two);
+            allAchievements.add(three);
+            allAchievements.add(four);
+            allAchievements.add(five);
+            allAchievements.add(six);
+        String achievementsListS = cheese.DisplayAllAchievements(allAchievements);
+        Text achievementsList = new Text();
         
+        Button leaveUserInfo = new Button("Back");
+        
+        VBox userInfoBox = new VBox(30);    
+        userInfoBox.setAlignment(Pos.CENTER);
+        userInfoBox.getChildren().addAll(userTitle, timerLabel, achievementsListTitle, achievementsList, leaveUserInfo);
+        
+        Scene userInfoScene = new Scene(userInfoBox, 500, 600);
+        
+        leaveUserInfo.setOnAction(b -> primaryStage.setScene(closet));
+        checkUserInfo.setOnAction(a -> {userTitle.setText("User Info for " + user.getUsername()); achievementsList.setText(cheese.DisplayAllAchievements(allAchievements)); primaryStage.setScene(userInfoScene);});
         
     }
+
+
     
     //saves clothes
     private void updateClothingImages() {
@@ -566,6 +588,7 @@ public class mano extends Application {
         updateClothingImages();
     }
     
+    
     public void achievementPopup(Stage primaryStage, String achievement, String desc, Runnable nextPopup) {
         Popup popup = new Popup();
 // CAN CHANGE COLOR AND FONT OF POPUP TEXT
@@ -578,7 +601,8 @@ public class mano extends Application {
 // EDIT THIS BELOW TO STYLE ACHIVEMENT POPUP
         popupText.setStyle("-fx-background-color: white; -fx-padding: 10; -fx-border-color: black;");
         popup.getContent().add(popupText);
-        
+
+// EDIT WHERE IT SHOWS UP
         popup.show(primaryStage, primaryStage.getX() + 200, primaryStage.getY() + 100);
         
         PauseTransition hideTimer = new PauseTransition(Duration.seconds(1.5));
