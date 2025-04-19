@@ -17,8 +17,7 @@ public class Neutral extends Avatar{
                                                   "/tops/B-top-4.png", "/tops/B-top-5.png", "/tops/B-top-6.png",
                                                   "/tops/G-top-4.png", "/tops/G-top-5.png", "/tops/G-top-6.png",  
                                                   "/tops/B-top-7.png", "/tops/B-top-8.png", 
-                                                  "/tops/G-top-7.png", "/tops/G-top-8.png",
-                                                  "/tops/B-top-7.png", "/tops/B-top-8.png", "/tops/B-top-9.png"});
+                                                  "/tops/G-top-7.png", "/tops/G-top-8.png"});
         
         clothingOptions.put("pants", new String[]{"/pants/B-pant-1.png", "/pants/B-pant-2.png", "/pants/B-pant-3.png", 
                                                   "/pants/G-pant-1.png", "/pants/G-pant-2.png", "/pants/G-pant-3.png",
