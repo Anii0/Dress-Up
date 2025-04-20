@@ -1,5 +1,3 @@
-//added method to display all unlocked achievements and ??? for achievements not yet unlocked.
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -13,9 +11,7 @@ import java.util.ArrayList;
  * @author zulfa
  */
 public class AchievementManager {
-    private final ArrayList<Achievements> cheeses;
-    private final ArrayList<Achievements> allAchievements = new ArrayList<>();
-    
+    private final ArrayList<Achievements> cheeses;    
     
     public AchievementManager(){
         cheeses = new ArrayList<>();
@@ -38,20 +34,7 @@ public class AchievementManager {
         return true;
     }
     
-    //got this from bestie gpt
-    public String displayAchievements() {
-    if (cheeses.isEmpty()) {
-        return "No achievements unlocked yet! Do better. Play more!";
-    } else{
-        StringBuilder sb = new StringBuilder("Unlocked Achievements:\n");
-        
-        for (Achievements name : cheeses) {
-        sb.append("- ").append(name.toString());
-        }
-    return sb.toString();
-    }
-}
-    
+    // displays all achievements in a list ("???" for unlocked achievements) 
     public String DisplayAllAchievements(ArrayList<Achievements> allAchievements){
 
     StringBuilder sb = new StringBuilder("Achievements:\n");
