@@ -8,7 +8,7 @@ package com.mycompany.dressup;
  *
  * @author zulfa
  */
-public class Boy extends Avatar{
+public class Boy extends Avatar{ 
     
     public Boy(String name){
         super(name);
@@ -21,7 +21,7 @@ public class Boy extends Avatar{
                                                   "/pants/B-pant-4.png", "/pants/B-pant-5.png", "/pants/B-pant-6.png", 
                                                   "/pants/B-pant-7.png", "/pants/B-pant-8.png"});
         
-        clothingOptions.put("hat", new String[]{"/hair/B-hair-1.png", "/hair/B-hair-2.png", "/hair/B-hair-3.png", 
+        clothingOptions.put("hair", new String[]{"/hair/B-hair-1.png", "/hair/B-hair-2.png", "/hair/B-hair-3.png", 
                                                 "/hair/B-hair-4.png", "/hair/B-hair-5.png"});
         
         setGender("/genders/B-face.png");
