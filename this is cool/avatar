@@ -25,12 +25,12 @@ public class Avatar {
         // Clothing options
         clothingOptions.put("shirt", new String[]{"/bg/empty.png"});
         clothingOptions.put("pants", new String[]{"/bg/empty.png"});
-        clothingOptions.put("hat", new String[]{"/bg/empty.png"});
+        clothingOptions.put("hair", new String[]{"/bg/empty.png"});
 
         // Default to first clothing item
         clothingIndex.put("shirt", 0);
         clothingIndex.put("pants", 0);
-        clothingIndex.put("hat", 0);
+        clothingIndex.put("hair", 0);
         
         setGender("/bg/empty.png");
         setSkinTone("/bg/avatar-default.png");
@@ -82,6 +82,5 @@ public class Avatar {
     public void setClothingOptions(String clothingType, String[] options) {
         clothingOptions.put(clothingType, options);
     }
-    
 }
 
