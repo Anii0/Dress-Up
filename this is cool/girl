@@ -10,9 +10,7 @@ import javafx.scene.image.Image;
  *
  * @author zulfa
  */
-public class Girl extends Avatar {
-
-    private Image girlBody;
+public class Girl extends Avatar {    
     
     public Girl(String name){
         super(name);
@@ -24,8 +22,8 @@ public class Girl extends Avatar {
         clothingOptions.put("pants", new String[]{"/pants/G-pant-1.png", "/pants/G-pant-2.png", "/pants/G-pant-3.png", 
                                                   "/pants/G-pant-4.png", "/pants/G-pant-5.png", "/pants/G-pant-6.png"});
         
-        clothingOptions.put("hat", new String[]{"/hair/G-hair-1.png", "/hair/G-hair-2.png", "/hair/G-hair-3.png", 
-                                                "/hair/G-hair-4.png", "/hair/G-hair-5.png", "/hair/G-hair-6.png", 
+        clothingOptions.put("hair", new String[]{"/hair/G-hair-4.png", "/hair/G-hair-2.png", "/hair/G-hair-3.png", 
+                                                "/hair/G-hair-1.png", "/hair/G-hair-5.png", "/hair/G-hair-6.png", 
                                                 "/hair/G-hair-7.png"});
         
         setGender("/genders/G-face.png");
