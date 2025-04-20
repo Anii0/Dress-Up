@@ -1,5 +1,6 @@
 // has all achievements
 // has user info scene
+// fixed comments
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -19,9 +20,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -42,42 +41,35 @@ import javafx.util.Duration;
  */
 public class mano extends Application {
     
-    //new
+    // user
     User user = new User("");
     Label timerLabel = new Label("Time: 0s");
-    //
     
+    // avatars
     Avatar avatar1 = new Avatar("Rename Me!");
     Avatar avatar2 = new Avatar("Rename Me!");
     Avatar avatar3 = new Avatar("Rename Me!");
+    Avatar currentAvatar = null;
+    Avatar displayAvatar = null;
+    Label avatarLabel;
     private String avatar1putname = "";
     private String avatar2putname = "";
     private String avatar3putname = "";
-    private Label name1Label = new Label("Avatar 1");
-    private Label name2Label = new Label("Avatar 2");
-    private Label name3Label = new Label("Avatar 3");
-    private ImageView bodyImgView;
-    
-    //lowkey dont need?
-    //Button editAvatar1;
-    //TextField avatar1text;
-    //Button setName;
-   
+    private final Label name1Label = new Label("Avatar 1");
+    private final Label name2Label = new Label("Avatar 2");
+    private final Label name3Label = new Label("Avatar 3");
     int setNameLoop1 = 0;
     int setNameLoop2 = 0;
     int setNameLoop3 = 0;
+    
     int editingAvatarIndex = 0; 
-
+    private ImageView bodyImgView;
     private ImageView shirtImg;
     private ImageView pantImg;
     private ImageView hatImg;
     private ImageView faceImg;
      
-    Avatar currentAvatar = null;
-    Label avatarLabel; // Label for displaying clothing text
-    
-    private Button userButton;
-    
+    // achievements
     AchievementManager cheese = new AchievementManager();
     Achievements one = new Achievements("Getting Started", "You just made your first avatar! Yay!");
     Achievements two = new Achievements("Seasoned Pro", "You already finished the game?!");
@@ -97,255 +89,231 @@ public class mano extends Application {
     ArrayList<Achievements> allAchievements = new ArrayList<>();
     
     
-    @Override
-    public void start(Stage primaryStage) {
-        
-       
-        //font
-        Font pixelFont = Font.loadFont(getClass().getResourceAsStream("/fonts/Daydream.ttf"), 14);
-              
-        
-        // Menu Scene
-            Text title = new Text("Play Dress Up!");
-            
-            title.setFont(Font.font(pixelFont.getName(), 30));
-            title.setFill(Color.CORAL);
+@Override
+public void start(Stage primaryStage) {
+//font
+Font pixelFont = Font.loadFont(getClass().getResourceAsStream("/fonts/Daydream.ttf"), 14);
 
-            Button play = new Button("Play!");
-            play.setStyle("-fx-font-family: 'Daydream'; -fx-padding: 0 4 8 4; "
-                    + "-fx-background-color: white; -fx-border-radius: 10; "
-                    + "-fx-border-width: 2px; -fx-background-radius: 10; "
-                    + "-fx-border-color: purple; -fx-text-fill: purple");
 
-            
-            VBox main = new VBox(50);
-            main.setAlignment(Pos.CENTER);
-            main.getChildren().addAll(title, play);
+// Menu Scene
+    Text title = new Text("Play Dress Up!");
+    title.setFont(Font.font(pixelFont.getName(), 30));
+    title.setFill(Color.CORAL);
 
-            ImageView titleBackground = new ImageView(new Image("/bg/title-background.png"));
-            StackPane fullmenu = new StackPane(titleBackground, main);
+    Button play = new Button("Play!");
+    play.setStyle("-fx-font-family: 'Daydream'; -fx-padding: 0 4 8 4; "
+            + "-fx-background-color: white; -fx-border-radius: 10; "
+            + "-fx-border-width: 2px; -fx-background-radius: 10; "
+            + "-fx-border-color: purple; -fx-text-fill: purple");
 
-            Scene menuScene = new Scene(fullmenu, 500, 600);
-            
-            
-        // User Log In
-            Text name = new Text("What's your name?");
-            name.setFont(new Font(30));
-            name.setFill(Color.CORAL);
-            
-            TextField enterUser = new TextField();
-            enterUser.setMaxWidth(200);
-            Button enter = new Button("Enter");
-            
-            VBox userScene = new VBox(50);
-            userScene.setAlignment(Pos.CENTER);
-            userScene.getChildren().addAll(name, enterUser, enter);
 
-            Scene userSceneReal = new Scene(userScene, 500, 600);
-            
-        // Closet Scene
-        Text closetText = new Text("Select An Avatar to Edit!");
-            
-            Button checkUserInfo = new Button("User Info");
+    VBox main = new VBox(50);
+    main.setAlignment(Pos.CENTER);
+    main.getChildren().addAll(title, play);
 
-            // Avatar selection buttons
-                Text avatar1Name = new Text(avatar1.getName());
-                Button editAvatar1 = new Button("Avatar 1");
-                
-                
-                //setting name for 1
-                TextField avatar1text = new TextField();
-                Button setName = new Button("Edit Name");
+    ImageView titleBackground = new ImageView(new Image("/bg/title-background.png"));
+    StackPane fullmenu = new StackPane(titleBackground, main);
+
+    Scene menuScene = new Scene(fullmenu, 500, 600);
+
+
+// User Log In
+    Text userName = new Text("Create a User Name");
+        userName.setFont(new Font(30));
+        userName.setFill(Color.CORAL);
+
+    TextField enterUser = new TextField();
+        enterUser.setMaxWidth(200);
+    Button enter = new Button("Enter");
+
+    VBox userScene = new VBox(50);
+        userScene.setAlignment(Pos.CENTER);
+        userScene.getChildren().addAll(userName, enterUser, enter);
+    Scene userSceneReal = new Scene(userScene, 500, 600);
+
+// Closet
+    Text closetText = new Text("Select An Avatar to Edit!");
+    Button checkUserInfo = new Button("User Info");
+
+    // Avatar 1 Name
+        Text avatar1Name = new Text(avatar1.getName());
+        Button editAvatar1 = new Button("Avatar 1");
+        TextField avatar1text = new TextField();
+        Button setName = new Button("Edit Name");
+        System.out.println(avatar1.getName());
+
+        HBox avatar1box = new HBox(20, avatar1Name, editAvatar1, avatar1text, setName) {{setAlignment(Pos.CENTER);}};
+
+        setName.setOnAction(eo -> {
+            setNameLoop1++;
+            if(setNameLoop1%2 == 0){
+                avatar1box.getChildren().removeAll(setName);
+                avatar1box.getChildren().addAll(avatar1text, setName);
+                avatar1box.getChildren().removeAll(name1Label);
                 System.out.println(avatar1.getName());
 
-                
-                HBox avatar1box = new HBox(20, avatar1Name, editAvatar1, avatar1text, setName) {{setAlignment(Pos.CENTER);}};
+                if (setNameLoop1 >= 2){
+                    if(cheese.isNotUnlocked(five.getName())){
+                        cheese.addAchievement(five);
+                        achievementPopup(primaryStage, five.getName(), five.getDescription(), null);
+                    }
+                }
+            }else{
+                avatar1box.getChildren().removeAll(avatar1text, editAvatar1, setName);
+                avatar1box.getChildren().addAll(editAvatar1, setName);
+                avatar1putname = avatar1text.getText();
+                avatar1Name.setText(avatar1putname);
+                avatar1.setName(avatar1putname);
+                System.out.println(avatar1.getName());
+            }
 
-                    setName.setOnAction(eo ->
-                    {
-                        setNameLoop1++;
-                        if(setNameLoop1%2 == 0){
-                            avatar1box.getChildren().removeAll(setName);
-                            avatar1box.getChildren().addAll(avatar1text, setName);
-                            avatar1box.getChildren().removeAll(name1Label);
-                            System.out.println(avatar1.getName());
-                            
-                            if (setNameLoop1 >= 2){
-                                if(cheese.isNotUnlocked(five.getName())){
-                                    cheese.addAchievement(five);
-                                    achievementPopup(primaryStage, five.getName(), five.getDescription(), null);
-                                }
-                            }
+            });
 
-                        }else{
-                            avatar1box.getChildren().removeAll(avatar1text, editAvatar1, setName);
-                            avatar1box.getChildren().addAll(editAvatar1, setName);
-                            avatar1putname = avatar1text.getText();
-                            avatar1Name.setText(avatar1putname);
-                            avatar1.setName(avatar1putname);
-                            System.out.println(avatar1.getName());
-                        }
-                        
-                    });
-                
-                    
-                    
-                Text avatar2Name = new Text(avatar2.getName());
-                Button editAvatar2 = new Button("Avatar 2");
-                
-                //setting name for 2 (doesnt work)
-                TextField avatar2text = new TextField();
-                Button setName2 = new Button("Edit Name");
+    // Avatar 2 Name
+        Text avatar2Name = new Text(avatar2.getName());
+        Button editAvatar2 = new Button("Avatar 2");
+        TextField avatar2text = new TextField();
+        Button setName2 = new Button("Edit Name");
+        System.out.println(avatar2.getName());
+
+        HBox avatar2box = new HBox(20, avatar2Name, editAvatar2, avatar2text, setName2) {{setAlignment(Pos.CENTER);}};
+
+        setName2.setOnAction(eo -> {
+            setNameLoop2++;
+            if(setNameLoop2%2 == 0){
+                avatar2box.getChildren().removeAll(setName2);
+                avatar2box.getChildren().addAll(avatar2text, setName2);
+                avatar2box.getChildren().removeAll(name2Label);
                 System.out.println(avatar2.getName());
 
-                
-                HBox avatar2box = new HBox(20, avatar2Name, editAvatar2, avatar2text, setName2) {{setAlignment(Pos.CENTER);}};
+                if (setNameLoop2 >= 2){
+                    if(cheese.isNotUnlocked(five.getName())){
+                        cheese.addAchievement(five);
+                        achievementPopup(primaryStage, five.getName(), five.getDescription(), null);
+                    }
+                }
+            }else{
+                avatar2box.getChildren().removeAll(avatar2text, editAvatar2, setName2);
+                avatar2box.getChildren().addAll(editAvatar2, setName2);
+                avatar2putname = avatar2text.getText();
+                avatar2Name.setText(avatar2putname);
+                avatar2.setName(avatar2putname);
+                System.out.println(avatar2.getName());
+            }
+        });
 
-                    setName2.setOnAction(eo ->
-                    {
-                        setNameLoop2++;
-                        if(setNameLoop2%2 == 0){
-                            avatar2box.getChildren().removeAll(setName2);
-                            avatar2box.getChildren().addAll(avatar2text, setName2);
-                            avatar2box.getChildren().removeAll(name2Label);
-                            System.out.println(avatar2.getName());
-                            
-                            if (setNameLoop2 >= 2){
-                                if(cheese.isNotUnlocked(five.getName())){
-                                    cheese.addAchievement(five);
-                                    achievementPopup(primaryStage, five.getName(), five.getDescription(), null);
-                                }
-                            }
 
-                        }else{
-                            avatar2box.getChildren().removeAll(avatar2text, editAvatar2, setName2);
-                            avatar2box.getChildren().addAll(editAvatar2, setName2);
-                            avatar2putname = avatar2text.getText();
-                            avatar2Name.setText(avatar2putname);
-                            avatar2.setName(avatar2putname);
-                            System.out.println(avatar2.getName());
-                        }
-                        
-                    });
-                
-                
+    // Avatar 3 Name
+        Text avatar3Name = new Text(avatar3.getName());
+        Button editAvatar3 = new Button("Avatar 3");
+        TextField avatar3text = new TextField();
+        Button setName3 = new Button("Edit Name");
+        System.out.println(avatar3.getName());
 
-                Text avatar3Name = new Text(avatar3.getName());
-                Button editAvatar3 = new Button("Avatar 3");
-                
-                //setting name for 3 
-                TextField avatar3text = new TextField();
-                Button setName3 = new Button("Edit Name");
+        HBox avatar3box = new HBox(20, avatar3Name, editAvatar3, avatar3text, setName3) {{setAlignment(Pos.CENTER);}};
+
+        setName3.setOnAction(eo -> {
+            setNameLoop3++;
+            if(setNameLoop3%2 == 0){
+                avatar3box.getChildren().removeAll(setName3);
+                avatar3box.getChildren().addAll(avatar3text, setName3);
+                avatar3box.getChildren().removeAll(name3Label);
                 System.out.println(avatar3.getName());
 
-                
-                HBox avatar3box = new HBox(20, avatar3Name, editAvatar3, avatar3text, setName3) {{setAlignment(Pos.CENTER);}};
+                if (setNameLoop3 >= 2){
+                    if(cheese.isNotUnlocked(five.getName())){
+                        cheese.addAchievement(five);
+                        achievementPopup(primaryStage, five.getName(), five.getDescription(), null);
+                    }
+                }
+            }else {
+                avatar3box.getChildren().removeAll(avatar3text, editAvatar3, setName3);
+                avatar3box.getChildren().addAll(editAvatar3, setName3);
+                avatar3putname = avatar3text.getText();
+                avatar3Name.setText(avatar3putname);
+                avatar3.setName(avatar3putname);
+                System.out.println(avatar3.getName());
+            }
+        });
+    // Closet Scene creation
+        Button back = new Button("Finish");
 
-                    setName3.setOnAction(eo ->
-                    {
-                        setNameLoop3++;
-                        if(setNameLoop3%2 == 0){
-                            avatar3box.getChildren().removeAll(setName3);
-                            avatar3box.getChildren().addAll(avatar3text, setName3);
-                            avatar3box.getChildren().removeAll(name3Label);
-                            System.out.println(avatar3.getName());
-                            
-                            if (setNameLoop3 >= 2){
-                                if(cheese.isNotUnlocked(five.getName())){
-                                    cheese.addAchievement(five);
-                                    achievementPopup(primaryStage, five.getName(), five.getDescription(), null);
-                                }
-                            }
-
-                        }else{
-                            avatar3box.getChildren().removeAll(avatar3text, editAvatar3, setName3);
-                            avatar3box.getChildren().addAll(editAvatar3, setName3);
-                            avatar3putname = avatar3text.getText();
-                            avatar3Name.setText(avatar3putname);
-                            avatar3.setName(avatar3putname);
-                            System.out.println(avatar3.getName());
-                        }
-                        
-                    });
-
-                Button back = new Button("Go Back");
-                                      
-            //vbox for picking avatar and naming           
-                VBox avatarSelection = new VBox(50, 
+        //vbox for picking avatar and naming           
+            VBox avatarSelection = new VBox(50, 
                 new HBox(20, checkUserInfo) {{setAlignment(Pos.TOP_RIGHT);}}, 
                 closetText, avatar1box,
                 new HBox(20, avatar2box) {{setAlignment(Pos.CENTER);}},
                 new HBox(20, avatar3box) {{setAlignment(Pos.CENTER);}}, back);
-                avatarSelection.setAlignment(Pos.CENTER);
-            // closet scene
-                Scene closet = new Scene(avatarSelection, 500, 600);
-                play.setOnAction(er -> primaryStage.setScene(userSceneReal));
-                enter.setOnAction(er -> {
-                    primaryStage.setScene(closet);
-                    user.setUsername(enterUser.getText());
-                    System.out.println(user.getUsername());
-                });
-                back.setOnAction(er -> primaryStage.setScene(menuScene));
-    
-    // Avatar Editing Scene
-        EventHandler<ActionEvent> avatarSelectionHandler = e -> {
+            avatarSelection.setAlignment(Pos.CENTER);
+        
+        // closet scene
+            Scene closet = new Scene(avatarSelection, 500, 600);
+            play.setOnAction(er -> primaryStage.setScene(userSceneReal));
+            enter.setOnAction(er -> {
+                primaryStage.setScene(closet);
+                user.setUsername(enterUser.getText());
+                System.out.println(user.getUsername());
+            });
 
-            
-            ImageView genMale = new ImageView(new Image("/icons/boyIcon.png"));
-            genMale.setFitWidth(30);
-            genMale.setFitHeight(30);
-            
-            ImageView genFemale = new ImageView(new Image("/icons/girlIcon.png"));
-            genFemale.setFitWidth(30);
-            genFemale.setFitHeight(30);
-            
-            ImageView genNeut = new ImageView(new Image("/icons/nuetIcon.png"));
-            genNeut.setFitWidth(30);
-            genNeut.setFitHeight(30);
-            
-            ImageView light = new ImageView(new Image("/icons/light.png"));
-            light.setFitWidth(30);
-            light.setFitHeight(30);
-            
-            ImageView med = new ImageView(new Image("/icons/medium.png"));
-            med.setFitWidth(30);
-            med.setFitHeight(30);
-            
-            ImageView dark = new ImageView(new Image("/icons/dark.png"));
-            dark.setFitWidth(30);
-            dark.setFitHeight(30);
-            
-            HBox genderLayout = new HBox(10, genMale, genFemale, genNeut);
-            genderLayout.setAlignment(Pos.CENTER);
-            
-            HBox skinLayout = new HBox(10, light, med, dark);
-            skinLayout.setAlignment(Pos.CENTER);
-            
-            
-            shirtImg = new ImageView();
-            shirtImg.setFitWidth(215);
-            shirtImg.setFitHeight(340);
-            pantImg = new ImageView();
-            pantImg.setFitWidth(215);
-            pantImg.setFitHeight(340);
-            hatImg = new ImageView();
-            hatImg.setFitWidth(215);
-            hatImg.setFitHeight(340);
-        
-        
+
+// Avatar Editing Scene
+    EventHandler<ActionEvent> avatarSelectionHandler = e -> {
+    // Icons for gender/skin tone selection
+        ImageView genMale = new ImageView(new Image("/icons/boyIcon.png"));
+        genMale.setFitWidth(30);
+        genMale.setFitHeight(30);
+
+        ImageView genFemale = new ImageView(new Image("/icons/girlIcon.png"));
+        genFemale.setFitWidth(30);
+        genFemale.setFitHeight(30);
+
+        ImageView genNeut = new ImageView(new Image("/icons/nuetIcon.png"));
+        genNeut.setFitWidth(30);
+        genNeut.setFitHeight(30);
+
+        ImageView light = new ImageView(new Image("/icons/light.png"));
+        light.setFitWidth(30);
+        light.setFitHeight(30);
+
+        ImageView med = new ImageView(new Image("/icons/medium.png"));
+        med.setFitWidth(30);
+        med.setFitHeight(30);
+
+        ImageView dark = new ImageView(new Image("/icons/dark.png"));
+        dark.setFitWidth(30);
+        dark.setFitHeight(30);
+
+        HBox genderLayout = new HBox(10, genMale, genFemale, genNeut);
+        genderLayout.setAlignment(Pos.CENTER);
+
+        HBox skinLayout = new HBox(10, light, med, dark);
+        skinLayout.setAlignment(Pos.CENTER);
+
+    // creates image views for the clothes
+        shirtImg = new ImageView();
+        shirtImg.setFitWidth(215);
+        shirtImg.setFitHeight(340);
+        pantImg = new ImageView();
+        pantImg.setFitWidth(215);
+        pantImg.setFitHeight(340);
+        hatImg = new ImageView();
+        hatImg.setFitWidth(215);
+        hatImg.setFitHeight(340);
+
+    // title
         avatarLabel = new Label("Select a gender and skin tone below!");
         avatarLabel.setStyle("-fx-font-weight: bold;");
-        
 
+    // image view for body and face (skin color + gender)
         bodyImgView = new ImageView();
         bodyImgView.setFitWidth(215);
         bodyImgView.setFitHeight(340);
-        
+
         faceImg = new ImageView();
         faceImg.setFitWidth(215);
         faceImg.setFitHeight(340);
-        
-        // Clothing navigation buttons
+
+    // Clothing navigation buttons
         Button prevShirt = new Button("←");
         Button nextShirt = new Button("→");
         Button prevPants = new Button("←");
@@ -356,95 +324,103 @@ public class mano extends Application {
         Button done1 = new Button("Done1");
         Button done2 = new Button("Done2");
         Button done3 = new Button("Done3");
+
+
+
+    // sets current avatar depending on which edit avatar button was pressed
+        if (e.getSource() == editAvatar1) {
+            currentAvatar = avatar1;
+            editingAvatarIndex = 1;
+        } else if (e.getSource() == editAvatar2) {
+            currentAvatar = avatar2;
+            editingAvatarIndex = 2;
+        } else if (e.getSource() == editAvatar3) {
+            currentAvatar = avatar3;
+            editingAvatarIndex = 3;
+        }
+
+    // gender and skin tone button functions
+        genMale.setOnMouseClicked(en -> {
+            changeGender("boy"); 
+            currentAvatar.setGender("/genders/B-face.png"); 
+            updateClothingImages();});
+        genFemale.setOnMouseClicked(en -> {
+            changeGender("girl"); 
+            currentAvatar.setGender("/genders/G-face.png"); 
+            updateClothingImages();});
+        genNeut.setOnMouseClicked(en -> {
+            changeGender("neutral"); 
+            currentAvatar.setGender("/genders/N-face.png"); 
+            updateClothingImages();});
+
+        light.setOnMouseClicked(en -> {
+        if (currentAvatar != null) {
+            currentAvatar.setSkinTone("/body/L-body.png");
+            System.out.println("Light skin selected");
+            updateClothingImages();}});
+
+        med.setOnMouseClicked(en -> {
+        if (currentAvatar != null) {
+            currentAvatar.setSkinTone("/body/M-body.png");
+            System.out.println("Medium skin selected");
+            updateClothingImages();}});
+
+        dark.setOnMouseClicked(en -> {
+        if (currentAvatar != null) {
+            currentAvatar.setSkinTone("/body/D-body.png");
+            System.out.println("Dark skin selected");
+            updateClothingImages();}});
+
+        bodyImgView.setImage(currentAvatar.getSkinTone());
+        faceImg.setImage(currentAvatar.getGender());
         
-        
-        
-        // Method to set up the avatar selection
-            if (e.getSource() == editAvatar1) {
-                currentAvatar = avatar1;
-                editingAvatarIndex = 1;
-            } else if (e.getSource() == editAvatar2) {
-                currentAvatar = avatar2;
-                editingAvatarIndex = 2;
-            } else if (e.getSource() == editAvatar3) {
-                currentAvatar = avatar3;
-                editingAvatarIndex = 3;
-            }
-                       
-            
-            genMale.setOnMouseClicked(en -> {changeGender("boy"); currentAvatar.setGender("/genders/B-face.png"); updateClothingImages();});
-            genFemale.setOnMouseClicked(en -> {changeGender("girl"); currentAvatar.setGender("/genders/G-face.png"); updateClothingImages();});
-            genNeut.setOnMouseClicked(en -> {changeGender("neutral"); currentAvatar.setGender("/genders/N-face.png"); updateClothingImages();});
-            
-            light.setOnMouseClicked(en -> {
-            if (currentAvatar != null) {
-                currentAvatar.setBodyType("/body/L-body.png");
-                System.out.println("Light skin selected");
-                updateClothingImages();}});
-            
-            med.setOnMouseClicked(en -> {
-            if (currentAvatar != null) {
-                currentAvatar.setBodyType("/body/M-body.png");
-                System.out.println("Medium skin selected");
-                updateClothingImages();}});
-            
-            dark.setOnMouseClicked(en -> {
-            if (currentAvatar != null) {
-                currentAvatar.setBodyType("/body/D-body.png");
-                System.out.println("Dark skin selected");
-                updateClothingImages();}});
-            
-              
-            bodyImgView.setImage(currentAvatar.getBodyType());
-            faceImg.setImage(currentAvatar.getGender());
-            //avatarLabel.setText(currentAvatar.getClothingText()); // Update label
+    // gets clothing type from list
+        shirtImg.setImage(new Image(currentAvatar.getClothingImg("shirt")));
+        pantImg.setImage(new Image(currentAvatar.getClothingImg("pants")));
+        hatImg.setImage(new Image(currentAvatar.getClothingImg("hat")));
+
+    //clothing button actions
+        prevShirt.setOnAction(ev -> { 
+            currentAvatar.previousClothing("shirt"); 
             shirtImg.setImage(new Image(currentAvatar.getClothingImg("shirt")));
+        });
+        nextShirt.setOnAction(ev -> { 
+            currentAvatar.nextClothing("shirt"); 
+            shirtImg.setImage(new Image(currentAvatar.getClothingImg("shirt")));
+        });
+
+        prevPants.setOnAction(ev -> { 
+            currentAvatar.previousClothing("pants"); 
             pantImg.setImage(new Image(currentAvatar.getClothingImg("pants")));
+        });
+        nextPants.setOnAction(ev -> { 
+            currentAvatar.nextClothing("pants"); 
+            pantImg.setImage(new Image(currentAvatar.getClothingImg("pants")));
+        });
+
+        prevHat.setOnAction(ev -> { 
+            currentAvatar.previousClothing("hat"); 
             hatImg.setImage(new Image(currentAvatar.getClothingImg("hat")));
+        });
+        nextHat.setOnAction(ev -> { 
+            currentAvatar.nextClothing("hat"); 
+            hatImg.setImage(new Image(currentAvatar.getClothingImg("hat")));
+        });
 
-            
-           
-           
-           
-            //clothing button actions
-            prevShirt.setOnAction(ev -> { 
-                currentAvatar.previousClothing("shirt"); 
-                shirtImg.setImage(new Image(currentAvatar.getClothingImg("shirt")));
-            });
-            nextShirt.setOnAction(ev -> { 
-                currentAvatar.nextClothing("shirt"); 
-                shirtImg.setImage(new Image(currentAvatar.getClothingImg("shirt")));
-            });
-
-            prevPants.setOnAction(ev -> { 
-                currentAvatar.previousClothing("pants"); 
-                pantImg.setImage(new Image(currentAvatar.getClothingImg("pants")));
-            });
-            nextPants.setOnAction(ev -> { 
-                currentAvatar.nextClothing("pants"); 
-                pantImg.setImage(new Image(currentAvatar.getClothingImg("pants")));
-            });
-
-            prevHat.setOnAction(ev -> { 
-                currentAvatar.previousClothing("hat"); 
-                hatImg.setImage(new Image(currentAvatar.getClothingImg("hat")));
-            });
-            nextHat.setOnAction(ev -> { 
-                currentAvatar.nextClothing("hat"); 
-                hatImg.setImage(new Image(currentAvatar.getClothingImg("hat")));
-            });
-            
-            VBox avatarEditor = new VBox(30);
-                avatarEditor.setAlignment(Pos.CENTER);
-                avatarEditor.getChildren().addAll(
-                avatarLabel,
-                new HBox(20,
-                new VBox(60, prevHat, prevShirt, prevPants){{setAlignment(Pos.CENTER);}},
-                new StackPane(bodyImgView, pantImg, shirtImg, faceImg, hatImg), 
-                new VBox(60, nextHat, nextShirt, nextPants){{setAlignment(Pos.CENTER);}}){{setAlignment(Pos.CENTER);}},
-                genderLayout, skinLayout
-            );
-
+    // avatar editing scene creation
+        VBox avatarEditor = new VBox(30);
+            avatarEditor.setAlignment(Pos.CENTER);
+            avatarEditor.getChildren().addAll(
+            avatarLabel,
+            new HBox(20,
+            new VBox(60, prevHat, prevShirt, prevPants){{setAlignment(Pos.CENTER);}},
+            new StackPane(bodyImgView, pantImg, shirtImg, faceImg, hatImg), 
+            new VBox(60, nextHat, nextShirt, nextPants){{setAlignment(Pos.CENTER);}}){{setAlignment(Pos.CENTER);}},
+            skinLayout, genderLayout
+        );
+        
+        // adds different dones based on which avatar is being edited
+        // (this is used for the achievements)
         if (currentAvatar == avatar1){
             avatarEditor.getChildren().add(done1);
         } else if(currentAvatar == avatar2){
@@ -452,177 +428,195 @@ public class mano extends Application {
         } else{
             avatarEditor.getChildren().add(done3);
         }
-        
+
         Scene editor = new Scene(avatarEditor, 500, 600);
+        primaryStage.setScene(editor);
 
-            primaryStage.setScene(editor);
-            
-            done1.setOnAction(en -> {
-                if (editingAvatarIndex == 1) avatar1 = currentAvatar;
-                
-                done1B = true;
-               
-                unlockAchievements();
-                showAchievements(primaryStage);
-                
-                primaryStage.setScene(closet);
-            });
-        
-            done2.setOnAction(en -> {
-                if (editingAvatarIndex == 2) avatar2 = currentAvatar;
-                              
-                done2B = true;
-                
-                unlockAchievements();
-                showAchievements(primaryStage);
-                
-                primaryStage.setScene(closet);
-            });
-        
-            done3.setOnAction(en -> {
-                if (editingAvatarIndex == 3) avatar3 = currentAvatar;
-                
-                done3B = true;
-                
-                unlockAchievements();
-                showAchievements(primaryStage);    
-                
-                primaryStage.setScene(closet);
-            });
-            
-        };
+    // done button actions - unlocks some achievements
+        done1.setOnAction(en -> {
+            if (editingAvatarIndex == 1) avatar1 = currentAvatar;
+            done1B = true; // used for achievements
+            unlockAchievements();
+            showAchievements(primaryStage);
+            primaryStage.setScene(closet);
+        });
 
-        // event handlers for avatar buttons
-        editAvatar1.setOnAction(avatarSelectionHandler);
-        editAvatar2.setOnAction(avatarSelectionHandler);
-        editAvatar3.setOnAction(avatarSelectionHandler);
-                
-                
-                
-        primaryStage.setTitle("Dress Up Game!");
-        primaryStage.setScene(menuScene);
-        primaryStage.show();
-        
-    //user info
-        Text userTitle = new Text("User Info for " + user.getUsername());
-               
-        //timer
-        Timeline timmmmer = new Timeline(new KeyFrame(Duration.seconds(1), el -> {
-            timerLabel.setText("You played for: " + (int) user.getTimeSeconds() + " seconds");
+        done2.setOnAction(en -> {
+            if (editingAvatarIndex == 2) avatar2 = currentAvatar;
+            done2B = true; // used for achievements
+            unlockAchievements();
+            showAchievements(primaryStage);
+            primaryStage.setScene(closet);
+        });
 
-            // Check if 3 seconds have passed
-            if ((int) user.getTimeSeconds() == 5) {
-                System.out.println("time" + user.getTimeSeconds());
-                if (cheese.isNotUnlocked(six.getName())) {
-                    cheese.addAchievement(six);
-                    achievementPopup(primaryStage, six.getName(), six.getDescription(), null);
-                }
+        done3.setOnAction(en -> {
+            if (editingAvatarIndex == 3) avatar3 = currentAvatar;
+            done3B = true; // used for achievements
+            unlockAchievements();
+            showAchievements(primaryStage);    
+            primaryStage.setScene(closet);
+        });
+
+    };
+
+// event handlers for avatar buttons
+    editAvatar1.setOnAction(avatarSelectionHandler);
+    editAvatar2.setOnAction(avatarSelectionHandler);
+    editAvatar3.setOnAction(avatarSelectionHandler);
+
+// primary stage creation
+    primaryStage.setTitle("Dress Up Game!");
+    primaryStage.setScene(menuScene);
+    primaryStage.show();
+
+//user info
+    Text userTitle = new Text("User Info for " + user.getUsername());
+    Button leaveUserInfo = new Button("Back");
+
+    //timer
+    Timeline timmmmer = new Timeline(new KeyFrame(Duration.seconds(1), el -> {
+        timerLabel.setText("You played for: " + (int) user.getTimeSeconds() + " seconds");
+
+        // Check if 5 seconds have passed (for achievement)
+        if ((int) user.getTimeSeconds() == 5) {
+            System.out.println("time" + user.getTimeSeconds());
+            if (cheese.isNotUnlocked(six.getName())) {
+                cheese.addAchievement(six);
+                achievementPopup(primaryStage, six.getName(), six.getDescription(), null);
             }
-        }));
-        timmmmer.setCycleCount(Timeline.INDEFINITE);
-        timmmmer.play();
-        
-        //achivements
+        }
+    }));
+    timmmmer.setCycleCount(Timeline.INDEFINITE);
+    timmmmer.play();
+
+    //achivements list
         Text achievementsListTitle = new Text("Unlocked Achievements:");
+        // array list of all achievements
             allAchievements.add(one);
             allAchievements.add(two);
             allAchievements.add(three);
             allAchievements.add(four);
             allAchievements.add(five);
             allAchievements.add(six);
-        String achievementsListS = cheese.DisplayAllAchievements(allAchievements);
         Text achievementsList = new Text();
-        
-        Button leaveUserInfo = new Button("Back");
-        
+    
+    // user info scene creation
         VBox userInfoBox = new VBox(30);    
         userInfoBox.setAlignment(Pos.CENTER);
         userInfoBox.getChildren().addAll(userTitle, timerLabel, achievementsListTitle, achievementsList, leaveUserInfo);
-        
         Scene userInfoScene = new Scene(userInfoBox, 500, 600);
-        
+    
+    // buttons
         leaveUserInfo.setOnAction(b -> primaryStage.setScene(closet));
         checkUserInfo.setOnAction(a -> {userTitle.setText("User Info for " + user.getUsername()); achievementsList.setText(cheese.DisplayAllAchievements(allAchievements)); primaryStage.setScene(userInfoScene);});
+
         
-    }
-
-
+// finish scene
+    Text finishTitle = new Text("You finished the game! Lets look at all your avatars!");
     
-    //saves clothes
-    private void updateClothingImages() {
+    VBox finishBox = new VBox();
+    finishBox.getChildren().addAll(finishTitle, displayAvatar(avatar1));
+    
+    Scene finishScene = new Scene(finishBox, 500, 600);
+    
+    back.setOnAction(er -> primaryStage.setScene(finishScene));
+}
+
+private StackPane displayAvatar(Avatar avatar){
+    displayAvatar = avatar;
+    ImageView body = new ImageView(displayAvatar.getSkinTone());
+    ImageView face = new ImageView(displayAvatar.getGender());
+    ImageView shirt = new ImageView(new Image(displayAvatar.getClothingImg("shirt")));
+    ImageView pants = new ImageView(new Image(displayAvatar.getClothingImg("pants")));
+    ImageView hat = new ImageView(new Image(displayAvatar.getClothingImg("hat")));
+    
+    StackPane display = new StackPane(body, face, shirt, pants, hat);
+    return display;
+}
+
+//saves clothes
+private void updateClothingImages() {
     if (currentAvatar != null) {
         faceImg.setImage(currentAvatar.getGender());
-        bodyImgView.setImage(currentAvatar.getBodyType());
+        bodyImgView.setImage(currentAvatar.getSkinTone());
         shirtImg.setImage(new Image(currentAvatar.getClothingImg("shirt")));
         pantImg.setImage(new Image(currentAvatar.getClothingImg("pants")));
         hatImg.setImage(new Image(currentAvatar.getClothingImg("hat")));
     }
 }
+
+private void changeGender(String gender) {
+    String name = currentAvatar.getName();
+    Avatar newAvatar;
     
-    private void changeGender(String gender) {
-        String name = currentAvatar.getName();
-        Avatar newAvatar;
-        if (gender.equals("boy")) {
+    // creates new avatar depending on gender
+    switch (gender) {
+        case "boy":
             newAvatar = new Boy(name);
-            bodyImgView.setImage(currentAvatar.getBodyType());
-        } else if (gender.equals("girl")) {
+            break;
+        case "girl":
             newAvatar = new Girl(name);
-            bodyImgView.setImage(currentAvatar.getBodyType());
-        } else {
+            break;
+        default:
             newAvatar = new Neutral(name);
-            bodyImgView.setImage(currentAvatar.getBodyType());
-        }
-
-        // Replace current avatar with new one
-        if (editingAvatarIndex == 1) {
-            avatar1 = newAvatar;
-            currentAvatar = avatar1;
-        } else if (editingAvatarIndex == 2) {
-            avatar2 = newAvatar;
-            currentAvatar = avatar2;
-        } else {
-            avatar3 = newAvatar;
-            currentAvatar = avatar3;
-        }
-
-        updateClothingImages();
+            break;
     }
     
+    newAvatar.setSkinTone(currentAvatar.getSkinToneString());
     
-    public void achievementPopup(Stage primaryStage, String achievement, String desc, Runnable nextPopup) {
-        Popup popup = new Popup();
-// CAN CHANGE COLOR AND FONT OF POPUP TEXT
-        Text popupName = new Text(achievement);
-            popupName.setStyle("-fx-font-weight: bold;");
-        Text popupDesc = new Text(desc);
-
-        VBox popupText = new VBox(popupName, popupDesc);
-        
-// EDIT THIS BELOW TO STYLE ACHIVEMENT POPUP
-        popupText.setStyle("-fx-background-color: white; -fx-padding: 10; -fx-border-color: black;");
-        popup.getContent().add(popupText);
-
-// EDIT WHERE IT SHOWS UP
-        popup.show(primaryStage, primaryStage.getX() + 200, primaryStage.getY() + 100);
-        
-        PauseTransition hideTimer = new PauseTransition(Duration.seconds(1.5));
-        hideTimer.setOnFinished(e -> {
-            popup.hide();
-            if (nextPopup != null) {
-                nextPopup.run();  // run next popup if there is one
-            }});
-        hideTimer.playFromStart();
-
+    // Replace current avatar with new one
+    switch (editingAvatarIndex) {
+        case 1:
+            avatar1 = newAvatar;
+            currentAvatar = avatar1;
+            break;
+        case 2:
+            avatar2 = newAvatar;
+            currentAvatar = avatar2;
+            break;
+        default:
+            avatar3 = newAvatar;
+            currentAvatar = avatar3;
+            break;
+    }
+        updateClothingImages();
 }
     
-    public void unlockAchievements() {
-    // Unlock achievement 1
+    
+public void achievementPopup(Stage primaryStage, String achievement, String desc, Runnable nextPopup) {
+    Popup popup = new Popup();
+// CAN CHANGE COLOR AND FONT OF POPUP TEXT
+    Text popupName = new Text(achievement);
+        popupName.setStyle("-fx-font-weight: bold;");
+    Text popupDesc = new Text(desc);
+
+    VBox popupText = new VBox(popupName, popupDesc);
+
+// EDIT THIS BELOW TO STYLE ACHIVEMENT POPUP
+    popupText.setStyle("-fx-background-color: white; -fx-padding: 10; -fx-border-color: black;");
+    popup.getContent().add(popupText);
+
+// EDIT WHERE IT SHOWS UP
+    popup.show(primaryStage, primaryStage.getX() + 200, primaryStage.getY() + 100);
+
+    PauseTransition hideTimer = new PauseTransition(Duration.seconds(1.5));
+    hideTimer.setOnFinished(e -> {
+        popup.hide();
+        if (nextPopup != null) {
+            nextPopup.run();  // run next popup if there is one
+        }});
+    hideTimer.playFromStart();
+
+}
+
+public void unlockAchievements() { // unlocks achievements that needs to be unlocked after pressing a done button
+    // Unlock achievement 1 (right when a done is pressed; doesnt matter which one)
     if (cheese.isNotUnlocked(one.getName())) {
         cheese.addAchievement(one);
         achiOne = true;
     }
 
-    // Unlock achievement 2
+    // Unlock achievement 2 (when all three done's have been clicked)
     if (done1B && done2B && done3B) {
         if (cheese.isNotUnlocked(two.getName())) {
             cheese.addAchievement(two);
@@ -630,7 +624,7 @@ public class mano extends Application {
         }
     }
 
-    // Unlock achievement 3
+    // Unlock achievement 3 (hatsune miku easter egg)
     if (currentAvatar.getClothingImg("shirt").contains("G-top-6") &&
         currentAvatar.getClothingImg("pants").contains("G-pant-5") &&
         currentAvatar.getClothingImg("hat").contains("G-hair-1")) {
@@ -641,7 +635,7 @@ public class mano extends Application {
         }
     }
 
-    // Unlock achievement 4
+    // Unlock achievement 4 (kim dokja easter egg)
     if (currentAvatar.getClothingImg("shirt").contains("B-top-7") &&
         currentAvatar.getClothingImg("pants").contains("B-pant-7") &&
         currentAvatar.getClothingImg("hat").contains("B-hair-4")) {
@@ -653,6 +647,8 @@ public class mano extends Application {
     }
 }
 
+// shows popups when you get an achievement
+// if two are earned at the same time, shows them one after another
 public void showAchievements(Stage primaryStage) {
     if (achiOne && achiThree) {
         achievementPopup(primaryStage, one.getName(), one.getDescription(), () -> {
