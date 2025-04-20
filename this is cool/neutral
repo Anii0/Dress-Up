@@ -9,7 +9,7 @@ package com.mycompany.dressup;
  * @author zulfa
  */
 public class Neutral extends Avatar{
-        public Neutral(String name){
+    public Neutral(String name){
         super(name);
         
         clothingOptions.put("shirt", new String[]{"/tops/B-top-1.png", "/tops/B-top-2.png", "/tops/B-top-3.png", 
@@ -25,7 +25,7 @@ public class Neutral extends Avatar{
                                                   "/pants/G-pant-4.png", "/pants/G-pant-5.png", "/pants/G-pant-6.png",
                                                   "/pants/B-pant-7.png", "/pants/B-pant-8.png"});
         
-        clothingOptions.put("hat", new String[]{"/hair/B-hair-1.png", "/hair/B-hair-2.png", "/hair/B-hair-3.png",
+        clothingOptions.put("hair", new String[]{"/hair/B-hair-1.png", "/hair/B-hair-2.png", "/hair/B-hair-3.png",
                                                 "/hair/G-hair-1.png", "/hair/G-hair-2.png", "/hair/G-hair-3.png", 
                                                 "/hair/B-hair-4.png", "/hair/B-hair-5.png", "/hair/G-hair-7.png",
                                                 "/hair/G-hair-4.png", "/hair/G-hair-5.png", "/hair/G-hair-6.png"});
