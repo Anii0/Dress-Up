@@ -1,0 +1,95 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Apr 16, 2025, 7:27:46 PM
+    Author     : Anikah
+*/
+.mainButtons {
+    -fx-font-family: 'Daydream'; 
+    -fx-padding: 0 4 8 4;
+    -fx-background-color: white; 
+    -fx-border-radius: 10; 
+    -fx-border-width: 2px; 
+    -fx-background-radius: 10; 
+    -fx-border-color: #8D9FFC; 
+    -fx-text-fill: #8D9FFC
+}
+
+.words {
+    -fx-font-family: 'Daydream'; 
+    -fx-fill: #8D9FFC;
+    -fx-font-size: 30px;
+}
+
+.user {
+    -fx-font-family: 'Daydream'; 
+    -fx-fill: #8D9FFC;
+    -fx-font-size: 20px;
+}
+
+.user-details {
+    -fx-font-family: 'Minecraft';
+    -fx-fill: #8D9FFC;
+    -fx-font-size: 15px;
+}
+
+.avatarButtons {
+    -fx-font-family: 'Minecraft';
+    -fx-background-color: white; 
+    -fx-border-radius: 10; 
+    -fx-border-width: 2px; 
+    -fx-background-radius: 10; 
+    -fx-border-color: #7c5ccd; 
+    -fx-text-fill: #6e51b8;
+    -fx-font-size: 15px;
+}
+
+.editName {
+    -fx-font-family: 'Minecraft';
+    -fx-background-color: white; 
+    -fx-border-radius: 10; 
+    -fx-border-width: 2px; 
+    -fx-background-radius: 10; 
+    -fx-border-color: #DED2FF; 
+    -fx-text-fill: #B69EF5;
+}
+
+.avatarNames {
+    -fx-font-family: 'Minecraft';
+    -fx-fill: #B69EF5;
+    -fx-font-size: 17px;
+}
+
+.text-field {
+    -fx-focus-color: rgb(255, 129, 251);
+}
+
+.arrowButtons {
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-background-color: #8D9FFC;
+    -fx-background-radius: 50%;
+    -fx-alignment: center;
+    -fx-border-color: #6C63FF;
+    -fx-border-radius: 20; 
+}
+
+.popup-box{
+    -fx-background-color: #ffe8fb; 
+    -fx-padding: 10; 
+    -fx-border-color: #ff94ed; 
+    -fx-border-radius: 10; 
+    -fx-background-radius: 10;
+}
+
+.popup-text {
+    -fx-fill: #5E3A73;
+}
+
+.avatarwords {
+    -fx-fill: #B69EF5;
+    -fx-font-family: 'Daydream'; 
+    -fx-font-size: 30px;
+}
