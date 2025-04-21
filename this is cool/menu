@@ -1,11 +1,9 @@
-// has all achievements
-// has user info scene
-// fixed comments
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMain.java to edit this template
  */
-package com.mycompany.dressup;
+package com.mycompany.excersize;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -29,7 +27,10 @@ import java.util.ArrayList;
 import javafx.animation.Timeline;
 import javafx.animation.KeyFrame; //to count seconds
 import javafx.animation.PauseTransition;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Popup;
+import javafx.stage.Screen;
 import javafx.util.Duration;
 
 
@@ -38,7 +39,7 @@ import javafx.util.Duration;
  *
  * @author zulfa
  */
-public class mano extends Application {
+public class menu extends Application {
     
     // user
     User user = new User("");
@@ -94,21 +95,20 @@ public class mano extends Application {
 public void start(Stage primaryStage) {
 //font
 Font pixelFont = Font.loadFont(getClass().getResourceAsStream("/fonts/Daydream.ttf"), 14);
+Font mineFont = Font.loadFont(getClass().getResourceAsStream("/fonts/Minecraft.ttf"), 14);
+Font quickFont = Font.loadFont(getClass().getResourceAsStream("/fonts/Quicksand_Bold.otf"), 14);
 
 
 // Menu Scene
-    Text title = new Text("Play Dress Up!");
-    title.setFont(Font.font(pixelFont.getName(), 30));
-    title.setFill(Color.CORAL);
+    Text title = new Text("Dress Up Game!");
+        title.getStyleClass().add("words");
 
-    Button play = new Button("Play!");
-    play.setStyle("-fx-font-family: 'Daydream'; -fx-padding: 0 4 8 4; "
-            + "-fx-background-color: white; -fx-border-radius: 10; "
-            + "-fx-border-width: 2px; -fx-background-radius: 10; "
-            + "-fx-border-color: purple; -fx-text-fill: purple");
+    Button play = new Button("PLAY!");
+    play.getStyleClass().add("mainButtons");
+    play.setFont(Font.font(pixelFont.getName(), 10));
 
 
-    VBox main = new VBox(50);
+    VBox main = new VBox(90);
     main.setAlignment(Pos.CENTER);
     main.getChildren().addAll(title, play);
 
@@ -116,34 +116,48 @@ Font pixelFont = Font.loadFont(getClass().getResourceAsStream("/fonts/Daydream.t
     StackPane fullmenu = new StackPane(titleBackground, main);
 
     Scene menuScene = new Scene(fullmenu, 500, 600);
+        String css = this.getClass().getResource("/textCSS.css").toExternalForm();
+        menuScene.getStylesheets().add(css);
 
 
 // User Log In
-    Text userName = new Text("Create a User Name");
-        userName.setFont(new Font(30));
-        userName.setFill(Color.CORAL);
+    Text userName = new Text("Create  a\n User Name");
+        userName.getStyleClass().add("words");
+        userName.setTextAlignment(TextAlignment.CENTER);
 
     TextField enterUser = new TextField();
         enterUser.setMaxWidth(200);
+        enterUser.getStyleClass().add("text-field");
     Button enter = new Button("Enter");
+        enter.getStyleClass().add("mainButtons");
 
     VBox userScene = new VBox(50);
         userScene.setAlignment(Pos.CENTER);
         userScene.getChildren().addAll(userName, enterUser, enter);
     Scene userSceneReal = new Scene(userScene, 500, 600);
+        userScene.getStylesheets().add(css);
+        userScene.setStyle("-fx-background-color: #F2F3FC");
 
 // Closet
-    Text closetText = new Text("Select An Avatar to Edit!");
+    Text closetText = new Text("Select An\nAvatar to Edit!");
+        closetText.getStyleClass().add("avatarwords");
+        closetText.setTextAlignment(TextAlignment.CENTER);
+
+    
     Button checkUserInfo = new Button("User Info");
+        checkUserInfo.getStyleClass().add("editName");
 
     // Avatar 1 Name
         avatar1Name = new Text(avatar1.getName());
+            avatar1Name.getStyleClass().add("avatarNames");
         Button editAvatar1 = new Button("Avatar 1");
+            editAvatar1.getStyleClass().add("avatarButtons");
         TextField avatar1text = new TextField();
         Button setName = new Button("Edit Name");
+            setName.getStyleClass().add("editName");
         System.out.println(avatar1.getName());
 
-        HBox avatar1box = new HBox(20, avatar1Name, editAvatar1, avatar1text, setName) {{setAlignment(Pos.CENTER);}};
+        HBox avatar1box = new HBox(15, avatar1Name, editAvatar1, avatar1text, setName) {{setAlignment(Pos.CENTER);}};
 
         setName.setOnAction(eo -> {
             setNameLoop1++;
@@ -172,12 +186,15 @@ Font pixelFont = Font.loadFont(getClass().getResourceAsStream("/fonts/Daydream.t
 
     // Avatar 2 Name
         avatar2Name = new Text(avatar2.getName());
+            avatar2Name.getStyleClass().add("avatarNames");
         Button editAvatar2 = new Button("Avatar 2");
+            editAvatar2.getStyleClass().add("avatarButtons");
         TextField avatar2text = new TextField();
         Button setName2 = new Button("Edit Name");
+            setName2.getStyleClass().add("editName");
         System.out.println(avatar2.getName());
 
-        HBox avatar2box = new HBox(20, avatar2Name, editAvatar2, avatar2text, setName2) {{setAlignment(Pos.CENTER);}};
+        HBox avatar2box = new HBox(15, avatar2Name, editAvatar2, avatar2text, setName2) {{setAlignment(Pos.CENTER);}};
 
         setName2.setOnAction(eo -> {
             setNameLoop2++;
@@ -206,12 +223,15 @@ Font pixelFont = Font.loadFont(getClass().getResourceAsStream("/fonts/Daydream.t
 
     // Avatar 3 Name 
         avatar3Name = new Text(avatar3.getName());
+            avatar3Name.getStyleClass().add("avatarNames");
         Button editAvatar3 = new Button("Avatar 3");
+            editAvatar3.getStyleClass().add("avatarButtons");
         TextField avatar3text = new TextField();
         Button setName3 = new Button("Edit Name");
+            setName3.getStyleClass().add("editName");
         System.out.println(avatar3.getName());
 
-        HBox avatar3box = new HBox(20, avatar3Name, editAvatar3, avatar3text, setName3) {{setAlignment(Pos.CENTER);}};
+        HBox avatar3box = new HBox(15, avatar3Name, editAvatar3, avatar3text, setName3) {{setAlignment(Pos.CENTER);}};
 
         setName3.setOnAction(eo -> {
             setNameLoop3++;
@@ -238,6 +258,7 @@ Font pixelFont = Font.loadFont(getClass().getResourceAsStream("/fonts/Daydream.t
         });
     // Closet Scene creation
         Button back = new Button("Finish");
+            back.getStyleClass().add("avatarButtons");
 
         //vbox for picking avatar and naming           
             VBox avatarSelection = new VBox(50, 
@@ -246,6 +267,7 @@ Font pixelFont = Font.loadFont(getClass().getResourceAsStream("/fonts/Daydream.t
                 new HBox(20, avatar2box) {{setAlignment(Pos.CENTER);}},
                 new HBox(20, avatar3box) {{setAlignment(Pos.CENTER);}}, back);
             avatarSelection.setAlignment(Pos.CENTER);
+            avatarSelection.setStyle("-fx-background-color: #F3E6FF");
         
         // closet scene
             Scene closet = new Scene(avatarSelection, 500, 600);
@@ -255,6 +277,8 @@ Font pixelFont = Font.loadFont(getClass().getResourceAsStream("/fonts/Daydream.t
                 user.setUsername(enterUser.getText());
                 System.out.println(user.getUsername());
             });
+            
+            closet.getStylesheets().add(css);
 
 
 // Avatar Editing Scene
@@ -283,11 +307,16 @@ Font pixelFont = Font.loadFont(getClass().getResourceAsStream("/fonts/Daydream.t
         ImageView dark = new ImageView(new Image("/icons/dark.png"));
         dark.setFitWidth(30);
         dark.setFitHeight(30);
+        
+        Text genderLabel = new Text("Genders: ");
+        genderLabel.getStyleClass().add("user-details");
+        Text skinLabel = new Text("Skin Tones: ");
+        skinLabel.getStyleClass().add("user-details");
 
-        HBox genderLayout = new HBox(10, genMale, genFemale, genNeut);
+        HBox genderLayout = new HBox(10, genderLabel, genMale, genFemale, genNeut);
         genderLayout.setAlignment(Pos.CENTER);
 
-        HBox skinLayout = new HBox(10, light, med, dark);
+        HBox skinLayout = new HBox(10, skinLabel, light, med, dark);
         skinLayout.setAlignment(Pos.CENTER);
 
     // creates image views for the clothes
@@ -316,16 +345,24 @@ Font pixelFont = Font.loadFont(getClass().getResourceAsStream("/fonts/Daydream.t
 
     // Clothing navigation buttons
         Button prevShirt = new Button("←");
+            prevShirt.getStyleClass().add("arrowButtons");
         Button nextShirt = new Button("→");
+            nextShirt.getStyleClass().add("arrowButtons");
         Button prevPants = new Button("←");
+            prevPants.getStyleClass().add("arrowButtons");
         Button nextPants = new Button("→");
+            nextPants.getStyleClass().add("arrowButtons");
         Button prevHair = new Button("←");
+            prevHair.getStyleClass().add("arrowButtons");
         Button nextHair = new Button("→");
+            nextHair.getStyleClass().add("arrowButtons");
 
         Button done1 = new Button("Done1");
+        done1.getStyleClass().add("mainButtons");
         Button done2 = new Button("Done2");
+        done2.getStyleClass().add("mainButtons");
         Button done3 = new Button("Done3");
-
+        done3.getStyleClass().add("mainButtons");
 
 
     // sets current avatar depending on which edit avatar button was pressed
@@ -430,6 +467,8 @@ Font pixelFont = Font.loadFont(getClass().getResourceAsStream("/fonts/Daydream.t
         }
 
         Scene editor = new Scene(avatarEditor, 500, 600);
+            editor.getStylesheets().add(css);
+            avatarEditor.setStyle("-fx-background-color: #DED2FF");
         primaryStage.setScene(editor);
 
     // done button actions - unlocks some achievements
@@ -471,14 +510,15 @@ Font pixelFont = Font.loadFont(getClass().getResourceAsStream("/fonts/Daydream.t
 
 //user info
     Text userTitle = new Text("User Info for " + user.getUsername());
+        userTitle.getStyleClass().add("user");
     Button leaveUserInfo = new Button("Back");
 
     //timer
     Timeline timmmmer = new Timeline(new KeyFrame(Duration.seconds(1), el -> {
         timerLabel.setText("You played for: " + (int) user.getTimeSeconds() + " seconds");
-
+            timerLabel.getStyleClass().add("user-details");
         // Check if 5 seconds have passed (for achievement)
-        if ((int) user.getTimeSeconds() == 5) {
+        if ((int) user.getTimeSeconds() == 60) {
             System.out.println("time" + user.getTimeSeconds());
             if (cheese.isNotUnlocked(six.getName())) {
                 cheese.addAchievement(six);
@@ -490,7 +530,10 @@ Font pixelFont = Font.loadFont(getClass().getResourceAsStream("/fonts/Daydream.t
     timmmmer.play();
 
     //achivements list
+        Text seperate = new Text("- - - - - - - - - - - - - - -");
+            seperate.getStyleClass().add("user-details");
         Text achievementsListTitle = new Text("Unlocked Achievements:");
+            achievementsListTitle.getStyleClass().add("user-details");
         // array list of all achievements
             allAchievements.add(one);
             allAchievements.add(two);
@@ -499,27 +542,47 @@ Font pixelFont = Font.loadFont(getClass().getResourceAsStream("/fonts/Daydream.t
             allAchievements.add(five);
             allAchievements.add(six);
         Text achievementsList = new Text();
+            achievementsList.getStyleClass().add("user-details");
     
     // user info scene creation
         VBox userInfoBox = new VBox(30);    
         userInfoBox.setAlignment(Pos.CENTER);
-        userInfoBox.getChildren().addAll(userTitle, timerLabel, achievementsListTitle, achievementsList, leaveUserInfo);
-        Scene userInfoScene = new Scene(userInfoBox, 500, 600);
+        userInfoBox.getChildren().addAll(userTitle, timerLabel, seperate, achievementsListTitle, achievementsList, leaveUserInfo);
+        Scene userInfoScene = new Scene(userInfoBox, 600, 600);
+            userInfoScene.getStylesheets().add(css);
+            userInfoBox.setStyle("-fx-background-color: #e0e5ff;");
+        
     
     // buttons
-        leaveUserInfo.setOnAction(b -> primaryStage.setScene(closet));
-        checkUserInfo.setOnAction(a -> {userTitle.setText("User Info for " + user.getUsername()); achievementsList.setText(cheese.DisplayAllAchievements(allAchievements)); primaryStage.setScene(userInfoScene);});
+        leaveUserInfo.setOnAction(b -> {primaryStage.setScene(closet);
+        Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+        primaryStage.setX((screenBounds.getWidth() - primaryStage.getWidth()) / 2);
+        primaryStage.setY((screenBounds.getHeight() - primaryStage.getHeight()) / 2);});
+        leaveUserInfo.getStyleClass().add("mainButtons");
+        checkUserInfo.setOnAction(a -> {userTitle.setText("User Info for " + user.getUsername()); 
+        achievementsList.setText(cheese.DisplayAllAchievements(allAchievements)); 
+        primaryStage.setScene(userInfoScene);
+        Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+        primaryStage.setX((screenBounds.getWidth() - primaryStage.getWidth()) / 2);
+        primaryStage.setY((screenBounds.getHeight() - primaryStage.getHeight()) / 2);});
 
         
-back.setOnAction(er -> {
-            Scene finishScene = buildFinishScene(primaryStage);
-            primaryStage.setScene(finishScene);
+    back.setOnAction(er -> {
+        Scene finishScene = buildFinishScene(primaryStage);
+        primaryStage.setScene(finishScene);
+        // since the final scene extends the x, i made so it recenters again, should we keep?
+        Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+        primaryStage.setX((screenBounds.getWidth() - primaryStage.getWidth()) / 2);
+        primaryStage.setY((screenBounds.getHeight() - primaryStage.getHeight()) / 2);
+            finishScene.getStylesheets().add(css);
         });
 
 }
+
+//shows 3 avatars together after it saves
 private Scene buildFinishScene(Stage primaryStage) {
     Text finishTitle = new Text("You finished the game! Let's look at all your avatars!");
-
+       finishTitle.getStyleClass().add("user-details"); 
     // HBox to show all avatars
     HBox allAvatars = new HBox(20);
     allAvatars.setAlignment(Pos.CENTER);
@@ -528,9 +591,11 @@ private Scene buildFinishScene(Stage primaryStage) {
         new VBox (20, displayAvatar(avatar2), avatar2Name) {{setAlignment(Pos.CENTER);}},
         new VBox (20, displayAvatar(avatar3), avatar3Name) {{setAlignment(Pos.CENTER);}}
     );
+    allAvatars.getStyleClass().add("user-details");
 
     Button quit = new Button("Quit");
-    quit.setOnAction(e -> primaryStage.close()); // closet is your scene already defined in start()
+    quit.setOnAction(e -> primaryStage.close());
+    quit.getStyleClass().add("mainButtons"); 
 
     VBox finishBox = new VBox(30, finishTitle, allAvatars, quit);
     finishBox.setAlignment(Pos.CENTER);
@@ -604,17 +669,18 @@ public void achievementPopup(Stage primaryStage, String achievement, String desc
     Text popupName = new Text(achievement);
         popupName.setStyle("-fx-font-weight: bold;");
     Text popupDesc = new Text(desc);
-
     VBox popupText = new VBox(popupName, popupDesc);
 
 // EDIT THIS BELOW TO STYLE ACHIVEMENT POPUP
-    popupText.setStyle("-fx-background-color: white; -fx-padding: 10; -fx-border-color: black;");
+    popupText.getStyleClass().add("popup-box");
+    popupName.getStyleClass().add("popup-text");
+    popupDesc.getStyleClass().add("popup-text");
     popup.getContent().add(popupText);
 
 // EDIT WHERE IT SHOWS UP
-    popup.show(primaryStage, primaryStage.getX() + 200, primaryStage.getY() + 100);
+    popup.show(primaryStage, primaryStage.getX() + 10, primaryStage.getY() + 50);
 
-    PauseTransition hideTimer = new PauseTransition(Duration.seconds(1.5));
+    PauseTransition hideTimer = new PauseTransition(Duration.seconds(5));
     hideTimer.setOnFinished(e -> {
         popup.hide();
         if (nextPopup != null) {
