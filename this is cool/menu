@@ -78,7 +78,7 @@ public class menu extends Application {
     Achievements three = new Achievements("Who's This Blue Haired, Blue Tie, Hiding in Your-", "I'm thinking Miku Miku ooeeoo");
     Achievements four = new Achievements("What a Punchable Face", "Is that THE Kim Dokja?!?!?!");
     Achievements five = new Achievements("It's Okay To Make Mistakes", "Or is it?");
-    Achievements six = new Achievements("Having Fun?", "You played a lot lmao");
+    Achievements six = new Achievements("Having Fun?", "You played for 60 seconds!");
     
     private boolean done1B = false;
     private boolean done2B = false;
@@ -357,11 +357,11 @@ Font quickFont = Font.loadFont(getClass().getResourceAsStream("/fonts/Quicksand_
         Button nextHair = new Button("→");
             nextHair.getStyleClass().add("arrowButtons");
 
-        Button done1 = new Button("Done1");
+        Button done1 = new Button("Done");
         done1.getStyleClass().add("mainButtons");
-        Button done2 = new Button("Done2");
+        Button done2 = new Button("Done");
         done2.getStyleClass().add("mainButtons");
-        Button done3 = new Button("Done3");
+        Button done3 = new Button("Done");
         done3.getStyleClass().add("mainButtons");
 
 
@@ -468,7 +468,7 @@ Font quickFont = Font.loadFont(getClass().getResourceAsStream("/fonts/Quicksand_
 
         Scene editor = new Scene(avatarEditor, 500, 600);
             editor.getStylesheets().add(css);
-            avatarEditor.setStyle("-fx-background-color: #DED2FF");
+            avatarEditor.setStyle("-fx-background-color: #e8e8ff");
         primaryStage.setScene(editor);
 
     // done button actions - unlocks some achievements
